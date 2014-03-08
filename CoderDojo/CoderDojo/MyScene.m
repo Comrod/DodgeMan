@@ -8,8 +8,8 @@
 
 #import "MyScene.h"
 
-static const uint32_t playerCategory     =  0x1 << 0;
-static const uint32_t redBallCategory    =  0x1 << 1;
+static const uint32_t redBallCategory     =  0x1 << 0;
+static const uint32_t playerCategory    =  0x1 << 1;
 
 int score = 0;
 
@@ -36,8 +36,8 @@ int score = 0;
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
         self.playerSprite.physicsBody.dynamic = YES;
-        self.playerSprite.physicsBody.categoryBitMask = redBallCategory;
-        self.playerSprite.physicsBody.contactTestBitMask = playerCategory;
+        self.playerSprite.physicsBody.categoryBitMask = playerCategory;
+        self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
         self.playerSprite.physicsBody.collisionBitMask = 0;
         self.playerSprite.physicsBody.usesPreciseCollisionDetection = YES;
         
