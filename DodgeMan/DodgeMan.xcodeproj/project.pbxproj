@@ -22,7 +22,7 @@
 		241AF86118CB67C600AA7AF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241AF83918CB67C600AA7AF9 /* Foundation.framework */; };
 		241AF86218CB67C600AA7AF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241AF83D18CB67C600AA7AF9 /* UIKit.framework */; };
 		241AF86A18CB67C600AA7AF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241AF86818CB67C600AA7AF9 /* InfoPlist.strings */; };
-		241AF86C18CB67C600AA7AF9 /* CoderDojoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */; };
+		241AF86C18CB67C600AA7AF9 /* DodgeManTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF86B18CB67C600AA7AF9 /* DodgeManTests.m */; };
 		241AF87618CB6B6000AA7AF9 /* backgroundiP5.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */; };
 		241AF87A18CB746E00AA7AF9 /* player@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87918CB746E00AA7AF9 /* player@2x.png */; };
 		241AF87D18CB749F00AA7AF9 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87C18CB749F00AA7AF9 /* player.png */; };
@@ -66,7 +66,7 @@
 		241AF85F18CB67C600AA7AF9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		241AF86718CB67C600AA7AF9 /* DodgeManTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DodgeManTests-Info.plist"; sourceTree = "<group>"; };
 		241AF86918CB67C600AA7AF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoderDojoTests.m; sourceTree = "<group>"; };
+		241AF86B18CB67C600AA7AF9 /* DodgeManTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DodgeManTests.m; sourceTree = "<group>"; };
 		241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundiP5.png; sourceTree = "<group>"; };
 		241AF87918CB746E00AA7AF9 /* player@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "player@2x.png"; sourceTree = "<group>"; };
 		241AF87C18CB749F00AA7AF9 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		241AF82D18CB67C600AA7AF9 = {
 			isa = PBXGroup;
 			children = (
-				241AF84118CB67C600AA7AF9 /* DodgeMan */,
-				241AF86518CB67C600AA7AF9 /* DodgeMan */,
+				241AF84118CB67C600AA7AF9 /* DogeMan */,
+				241AF86518CB67C600AA7AF9 /* DogeMan */,
 				241AF83818CB67C600AA7AF9 /* Frameworks */,
 				241AF83718CB67C600AA7AF9 /* Products */,
 			);
@@ -135,7 +135,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		241AF84118CB67C600AA7AF9 /* DodgeMan */ = {
+		241AF84118CB67C600AA7AF9 /* DogeMan */ = {
 			isa = PBXGroup;
 			children = (
 				241AF84A18CB67C600AA7AF9 /* AppDelegate.h */,
@@ -151,7 +151,7 @@
 				241AF85818CB67C600AA7AF9 /* Images.xcassets */,
 				241AF84218CB67C600AA7AF9 /* Supporting Files */,
 			);
-			name = DodgeMan;
+			name = DogeMan;
 			path = CoderDojo;
 			sourceTree = "<group>";
 		};
@@ -166,13 +166,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		241AF86518CB67C600AA7AF9 /* DodgeMan */ = {
+		241AF86518CB67C600AA7AF9 /* DogeMan */ = {
 			isa = PBXGroup;
 			children = (
-				241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */,
+				241AF86B18CB67C600AA7AF9 /* DodgeManTests.m */,
 				241AF86618CB67C600AA7AF9 /* Supporting Files */,
 			);
-			name = DodgeMan;
+			name = DogeMan;
 			path = CoderDojoTests;
 			sourceTree = "<group>";
 		};
@@ -317,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				241AF86C18CB67C600AA7AF9 /* CoderDojoTests.m in Sources */,
+				241AF86C18CB67C600AA7AF9 /* DodgeManTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +520,7 @@
 				241AF87118CB67C600AA7AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		241AF87218CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "DodgeManTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +529,7 @@
 				241AF87418CB67C600AA7AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
