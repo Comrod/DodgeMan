@@ -17,7 +17,6 @@
 		241AF84F18CB67C600AA7AF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 241AF84D18CB67C600AA7AF9 /* Main.storyboard */; };
 		241AF85218CB67C600AA7AF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF85118CB67C600AA7AF9 /* ViewController.m */; };
 		241AF85518CB67C600AA7AF9 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF85418CB67C600AA7AF9 /* MyScene.m */; };
-		241AF85718CB67C600AA7AF9 /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF85618CB67C600AA7AF9 /* Spaceship.png */; };
 		241AF85918CB67C600AA7AF9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 241AF85818CB67C600AA7AF9 /* Images.xcassets */; };
 		241AF86018CB67C600AA7AF9 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241AF85F18CB67C600AA7AF9 /* XCTest.framework */; };
 		241AF86118CB67C600AA7AF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 241AF83918CB67C600AA7AF9 /* Foundation.framework */; };
@@ -25,6 +24,7 @@
 		241AF86A18CB67C600AA7AF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241AF86818CB67C600AA7AF9 /* InfoPlist.strings */; };
 		241AF86C18CB67C600AA7AF9 /* CoderDojoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */; };
 		241AF87618CB6B6000AA7AF9 /* backgroundiP5.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */; };
+		241AF87818CB709700AA7AF9 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87718CB709700AA7AF9 /* character.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,6 @@
 		241AF85118CB67C600AA7AF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		241AF85318CB67C600AA7AF9 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		241AF85418CB67C600AA7AF9 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
-		241AF85618CB67C600AA7AF9 /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		241AF85818CB67C600AA7AF9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		241AF85E18CB67C600AA7AF9 /* CoderDojoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoderDojoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		241AF85F18CB67C600AA7AF9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -62,6 +61,7 @@
 		241AF86918CB67C600AA7AF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoderDojoTests.m; sourceTree = "<group>"; };
 		241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundiP5.png; sourceTree = "<group>"; };
+		241AF87718CB709700AA7AF9 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,7 +130,7 @@
 				241AF85118CB67C600AA7AF9 /* ViewController.m */,
 				241AF85318CB67C600AA7AF9 /* MyScene.h */,
 				241AF85418CB67C600AA7AF9 /* MyScene.m */,
-				241AF85618CB67C600AA7AF9 /* Spaceship.png */,
+				241AF87718CB709700AA7AF9 /* character.png */,
 				241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */,
 				241AF85818CB67C600AA7AF9 /* Images.xcassets */,
 				241AF84218CB67C600AA7AF9 /* Supporting Files */,
@@ -246,8 +246,8 @@
 				241AF87618CB6B6000AA7AF9 /* backgroundiP5.png in Resources */,
 				241AF84618CB67C600AA7AF9 /* InfoPlist.strings in Resources */,
 				241AF85918CB67C600AA7AF9 /* Images.xcassets in Resources */,
-				241AF85718CB67C600AA7AF9 /* Spaceship.png in Resources */,
 				241AF84F18CB67C600AA7AF9 /* Main.storyboard in Resources */,
+				241AF87818CB709700AA7AF9 /* character.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

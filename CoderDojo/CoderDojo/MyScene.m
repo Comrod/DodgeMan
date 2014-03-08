@@ -16,22 +16,25 @@
     {
         /* Setup your scene here */
         
-        //self.backgroundColor = [SKColor colorWithRed:0.15 green:0.15 blue:0.3 alpha:1.0];
+        self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
         
         //Background
-        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiP5"];
+        /*SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiP5"];
         background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        background.name = @"BACKGROUND";
+        background.name = @"BACKGROUND";*/
+        
+        //Character
+        //SKSpriteNode *character = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
+        
         
         //Random label
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        myLabel.text = @"Hello, World!";
+        /*SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        myLabel.text = @"Hello, World!";d
         myLabel.fontSize = 30;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
+                                       CGRectGetMidY(self.frame));*/
         
-        [self addChild:background];
-        [self addChild:myLabel];
+        //[self addChild:myLabel];
     }
     return self;
 }
@@ -43,13 +46,13 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         
         sprite.position = location;
         
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
+        //SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
         
-        [sprite runAction:[SKAction repeatActionForever:action]];
+        //[sprite runAction:[SKAction repeatActionForever:action]];
         
         [self addChild:sprite];
     }
