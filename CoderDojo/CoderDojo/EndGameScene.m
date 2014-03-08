@@ -29,8 +29,8 @@
             message2 = @"Play Again?";
         }
         
-        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
+        SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
         label.text = message;
         label.fontSize = 40;
         label.fontColor = [SKColor blackColor];

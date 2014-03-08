@@ -38,7 +38,7 @@ int score = 0;
         self.playerSprite.position = CGPointMake(playerLocX, playerLocY);
         [self addChild:self.playerSprite];
         
-        self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
         self.scoreLabel.text = @"0";
         self.scoreLabel.fontSize = 40;
         self.scoreLabel.fontColor = [SKColor blackColor];
@@ -71,7 +71,7 @@ int score = 0;
     NSLog(@"Actual Y: %i", actualY);
     
     //Initiates red ball offscreen
-    if (actualY >= 69)
+    if (actualY >= 75)
     {
         //Prevents balls from spawning in the ground
         redBall.position = CGPointMake(self.frame.size.width + redBall.size.width/2, actualY);
