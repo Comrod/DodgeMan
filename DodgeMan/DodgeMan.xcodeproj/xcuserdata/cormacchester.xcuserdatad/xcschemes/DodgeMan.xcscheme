@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
-               BuildableName = "CoderDojo.app"
+               BuildableName = "DodgeMan.app"
                BlueprintName = "DodgeMan"
                ReferencedContainer = "container:DodgeMan.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "241AF85D18CB67C600AA7AF9"
-               BuildableName = "CoderDojoTests.xctest"
+               BuildableName = "DodgeManTests.xctest"
                BlueprintName = "DodgeManTests"
                ReferencedContainer = "container:DodgeMan.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
-            BuildableName = "CoderDojo.app"
+            BuildableName = "DodgeMan.app"
             BlueprintName = "DodgeMan"
             ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
-            BuildableName = "CoderDojo.app"
+            BuildableName = "DodgeMan.app"
             BlueprintName = "DodgeMan"
             ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
-            BuildableName = "CoderDojo.app"
+            BuildableName = "DodgeMan.app"
             BlueprintName = "DodgeMan"
             ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
