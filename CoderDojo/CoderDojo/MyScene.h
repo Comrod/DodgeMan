@@ -12,12 +12,14 @@
 {
     int playerLocX;
     int playerLocY;
+    int score;
     BOOL isActionCompleted;
 }
 
 
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;
+@property SKSpriteNode *pauseButton;
 @property NSString *scoreString;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;

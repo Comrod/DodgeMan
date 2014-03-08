@@ -12,8 +12,6 @@
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
 
-int score = 0;
-
 @implementation MyScene
 
 -(id)initWithSize:(CGSize)size
@@ -25,6 +23,9 @@ int score = 0;
         //Sets player location
         playerLocX = 50;
         playerLocY = 89;
+        
+        //Sets player score
+        score = 0;
         
         //Set Background
         SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiP5"];
@@ -44,6 +45,12 @@ int score = 0;
         self.scoreLabel.fontColor = [SKColor blackColor];
         self.scoreLabel.position = CGPointMake(50, 260);
         [self addChild:self.scoreLabel];
+        
+        //Pause Button
+        self.pauseButton = [SKSpriteNode spriteNodeWithImageNamed:@"pauseButton"];
+        self.pauseButton.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 40);
+        self.pauseButton.name = @"pauseButton";
+        [self addChild:self.pauseButton];
         
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
@@ -134,6 +141,17 @@ NSDate *startTime;
     
     //Starts Timer
     startTime = [NSDate date];
+
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    SKNode *node = [self nodeAtPoint:location];
+    
+    //Pauses Scene
+    if ([node.name isEqualToString:@"pauseButton"])
+    {
+        NSLog(@"Pause button pressed");
+    }
+    
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
