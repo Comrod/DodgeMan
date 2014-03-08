@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:CoderDojo.xcodeproj">
+      location = "self:DodgeMan.xcodeproj">
    </FileRef>
 </Workspace>

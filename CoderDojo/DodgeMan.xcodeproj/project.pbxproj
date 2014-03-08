@@ -45,15 +45,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		241AF83618CB67C600AA7AF9 /* CoderDojo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoderDojo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		241AF83618CB67C600AA7AF9 /* DodgeMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DodgeMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		241AF83918CB67C600AA7AF9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		241AF83B18CB67C600AA7AF9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		241AF83D18CB67C600AA7AF9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		241AF83F18CB67C600AA7AF9 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
-		241AF84318CB67C600AA7AF9 /* CoderDojo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoderDojo-Info.plist"; sourceTree = "<group>"; };
+		241AF84318CB67C600AA7AF9 /* DodgeMan-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DodgeMan-Info.plist"; sourceTree = "<group>"; };
 		241AF84518CB67C600AA7AF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		241AF84718CB67C600AA7AF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		241AF84918CB67C600AA7AF9 /* CoderDojo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoderDojo-Prefix.pch"; sourceTree = "<group>"; };
+		241AF84918CB67C600AA7AF9 /* DodgeMan-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DodgeMan-Prefix.pch"; sourceTree = "<group>"; };
 		241AF84A18CB67C600AA7AF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		241AF84B18CB67C600AA7AF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		241AF84E18CB67C600AA7AF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -62,9 +62,9 @@
 		241AF85318CB67C600AA7AF9 /* MyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyScene.h; sourceTree = "<group>"; };
 		241AF85418CB67C600AA7AF9 /* MyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyScene.m; sourceTree = "<group>"; };
 		241AF85818CB67C600AA7AF9 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		241AF85E18CB67C600AA7AF9 /* CoderDojoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoderDojoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		241AF85E18CB67C600AA7AF9 /* DodgeManTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DodgeManTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		241AF85F18CB67C600AA7AF9 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		241AF86718CB67C600AA7AF9 /* CoderDojoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoderDojoTests-Info.plist"; sourceTree = "<group>"; };
+		241AF86718CB67C600AA7AF9 /* DodgeManTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DodgeManTests-Info.plist"; sourceTree = "<group>"; };
 		241AF86918CB67C600AA7AF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoderDojoTests.m; sourceTree = "<group>"; };
 		241AF87518CB6B6000AA7AF9 /* backgroundiP5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backgroundiP5.png; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		241AF82D18CB67C600AA7AF9 = {
 			isa = PBXGroup;
 			children = (
-				241AF84118CB67C600AA7AF9 /* CoderDojo */,
-				241AF86518CB67C600AA7AF9 /* CoderDojoTests */,
+				241AF84118CB67C600AA7AF9 /* DodgeMan */,
+				241AF86518CB67C600AA7AF9 /* DodgeMan */,
 				241AF83818CB67C600AA7AF9 /* Frameworks */,
 				241AF83718CB67C600AA7AF9 /* Products */,
 			);
@@ -117,8 +117,8 @@
 		241AF83718CB67C600AA7AF9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				241AF83618CB67C600AA7AF9 /* CoderDojo.app */,
-				241AF85E18CB67C600AA7AF9 /* CoderDojoTests.xctest */,
+				241AF83618CB67C600AA7AF9 /* DodgeMan.app */,
+				241AF85E18CB67C600AA7AF9 /* DodgeManTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,7 +135,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		241AF84118CB67C600AA7AF9 /* CoderDojo */ = {
+		241AF84118CB67C600AA7AF9 /* DodgeMan */ = {
 			isa = PBXGroup;
 			children = (
 				241AF84A18CB67C600AA7AF9 /* AppDelegate.h */,
@@ -151,33 +151,35 @@
 				241AF85818CB67C600AA7AF9 /* Images.xcassets */,
 				241AF84218CB67C600AA7AF9 /* Supporting Files */,
 			);
+			name = DodgeMan;
 			path = CoderDojo;
 			sourceTree = "<group>";
 		};
 		241AF84218CB67C600AA7AF9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				241AF84318CB67C600AA7AF9 /* CoderDojo-Info.plist */,
+				241AF84318CB67C600AA7AF9 /* DodgeMan-Info.plist */,
 				241AF84418CB67C600AA7AF9 /* InfoPlist.strings */,
 				241AF84718CB67C600AA7AF9 /* main.m */,
-				241AF84918CB67C600AA7AF9 /* CoderDojo-Prefix.pch */,
+				241AF84918CB67C600AA7AF9 /* DodgeMan-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		241AF86518CB67C600AA7AF9 /* CoderDojoTests */ = {
+		241AF86518CB67C600AA7AF9 /* DodgeMan */ = {
 			isa = PBXGroup;
 			children = (
 				241AF86B18CB67C600AA7AF9 /* CoderDojoTests.m */,
 				241AF86618CB67C600AA7AF9 /* Supporting Files */,
 			);
+			name = DodgeMan;
 			path = CoderDojoTests;
 			sourceTree = "<group>";
 		};
 		241AF86618CB67C600AA7AF9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				241AF86718CB67C600AA7AF9 /* CoderDojoTests-Info.plist */,
+				241AF86718CB67C600AA7AF9 /* DodgeManTests-Info.plist */,
 				241AF86818CB67C600AA7AF9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -201,9 +203,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		241AF83518CB67C600AA7AF9 /* CoderDojo */ = {
+		241AF83518CB67C600AA7AF9 /* DodgeMan */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 241AF86F18CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "CoderDojo" */;
+			buildConfigurationList = 241AF86F18CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "DodgeMan" */;
 			buildPhases = (
 				241AF83218CB67C600AA7AF9 /* Sources */,
 				241AF83318CB67C600AA7AF9 /* Frameworks */,
@@ -213,14 +215,14 @@
 			);
 			dependencies = (
 			);
-			name = CoderDojo;
+			name = DodgeMan;
 			productName = CoderDojo;
-			productReference = 241AF83618CB67C600AA7AF9 /* CoderDojo.app */;
+			productReference = 241AF83618CB67C600AA7AF9 /* DodgeMan.app */;
 			productType = "com.apple.product-type.application";
 		};
-		241AF85D18CB67C600AA7AF9 /* CoderDojoTests */ = {
+		241AF85D18CB67C600AA7AF9 /* DodgeManTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 241AF87218CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "CoderDojoTests" */;
+			buildConfigurationList = 241AF87218CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "DodgeManTests" */;
 			buildPhases = (
 				241AF85A18CB67C600AA7AF9 /* Sources */,
 				241AF85B18CB67C600AA7AF9 /* Frameworks */,
@@ -231,9 +233,9 @@
 			dependencies = (
 				241AF86418CB67C600AA7AF9 /* PBXTargetDependency */,
 			);
-			name = CoderDojoTests;
+			name = DodgeManTests;
 			productName = CoderDojoTests;
-			productReference = 241AF85E18CB67C600AA7AF9 /* CoderDojoTests.xctest */;
+			productReference = 241AF85E18CB67C600AA7AF9 /* DodgeManTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -250,7 +252,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 241AF83118CB67C600AA7AF9 /* Build configuration list for PBXProject "CoderDojo" */;
+			buildConfigurationList = 241AF83118CB67C600AA7AF9 /* Build configuration list for PBXProject "DodgeMan" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -263,8 +265,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				241AF83518CB67C600AA7AF9 /* CoderDojo */,
-				241AF85D18CB67C600AA7AF9 /* CoderDojoTests */,
+				241AF83518CB67C600AA7AF9 /* DodgeMan */,
+				241AF85D18CB67C600AA7AF9 /* DodgeManTests */,
 			);
 		};
 /* End PBXProject section */
@@ -324,7 +326,7 @@
 /* Begin PBXTargetDependency section */
 		241AF86418CB67C600AA7AF9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 241AF83518CB67C600AA7AF9 /* CoderDojo */;
+			target = 241AF83518CB67C600AA7AF9 /* DodgeMan */;
 			targetProxy = 241AF86318CB67C600AA7AF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -435,9 +437,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoderDojo/CoderDojo-Prefix.pch";
-				INFOPLIST_FILE = "CoderDojo/CoderDojo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CoderDojo/DodgeMan-Prefix.pch";
+				INFOPLIST_FILE = "CoderDojo/DodgeMan-Info.plist";
+				PRODUCT_NAME = DodgeMan;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -449,9 +451,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoderDojo/CoderDojo-Prefix.pch";
-				INFOPLIST_FILE = "CoderDojo/CoderDojo-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "CoderDojo/DodgeMan-Prefix.pch";
+				INFOPLIST_FILE = "CoderDojo/DodgeMan-Info.plist";
+				PRODUCT_NAME = DodgeMan;
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -473,8 +475,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CoderDojoTests/CoderDojoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "CoderDojoTests/DodgeManTests-Info.plist";
+				PRODUCT_NAME = DodgeManTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -492,8 +494,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoderDojo/CoderDojo-Prefix.pch";
-				INFOPLIST_FILE = "CoderDojoTests/CoderDojoTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "CoderDojoTests/DodgeManTests-Info.plist";
+				PRODUCT_NAME = DodgeManTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -502,7 +504,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		241AF83118CB67C600AA7AF9 /* Build configuration list for PBXProject "CoderDojo" */ = {
+		241AF83118CB67C600AA7AF9 /* Build configuration list for PBXProject "DodgeMan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241AF86D18CB67C600AA7AF9 /* Debug */,
@@ -511,21 +513,23 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		241AF86F18CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "CoderDojo" */ = {
+		241AF86F18CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "DodgeMan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241AF87018CB67C600AA7AF9 /* Debug */,
 				241AF87118CB67C600AA7AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		241AF87218CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "CoderDojoTests" */ = {
+		241AF87218CB67C600AA7AF9 /* Build configuration list for PBXNativeTarget "DodgeManTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				241AF87318CB67C600AA7AF9 /* Debug */,
 				241AF87418CB67C600AA7AF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

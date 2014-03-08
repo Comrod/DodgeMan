@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
                BuildableName = "CoderDojo.app"
-               BlueprintName = "CoderDojo"
-               ReferencedContainer = "container:CoderDojo.xcodeproj">
+               BlueprintName = "DodgeMan"
+               ReferencedContainer = "container:DodgeMan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "241AF85D18CB67C600AA7AF9"
                BuildableName = "CoderDojoTests.xctest"
-               BlueprintName = "CoderDojoTests"
-               ReferencedContainer = "container:CoderDojo.xcodeproj">
+               BlueprintName = "DodgeManTests"
+               ReferencedContainer = "container:DodgeMan.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
             BuildableName = "CoderDojo.app"
-            BlueprintName = "CoderDojo"
-            ReferencedContainer = "container:CoderDojo.xcodeproj">
+            BlueprintName = "DodgeMan"
+            ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
             BuildableName = "CoderDojo.app"
-            BlueprintName = "CoderDojo"
-            ReferencedContainer = "container:CoderDojo.xcodeproj">
+            BlueprintName = "DodgeMan"
+            ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "241AF83518CB67C600AA7AF9"
             BuildableName = "CoderDojo.app"
-            BlueprintName = "CoderDojo"
-            ReferencedContainer = "container:CoderDojo.xcodeproj">
+            BlueprintName = "DodgeMan"
+            ReferencedContainer = "container:DodgeMan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
