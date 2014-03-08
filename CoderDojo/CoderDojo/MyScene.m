@@ -50,7 +50,7 @@ static const uint32_t playerCategory =  0x1 << 1;
         self.pauseButton = [SKSpriteNode spriteNodeWithImageNamed:@"pauseButton"];
         self.pauseButton.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 40);
         self.pauseButton.name = @"pauseButton";
-        [self addChild:self.pauseButton];
+        //[self addChild:self.pauseButton];
         
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
@@ -177,10 +177,11 @@ NSDate *startTime;
         }
         
         //Moves and animates player
-        /*int velocity = elapsedTime * -2750;
+        //int velocity = elapsedTime * -3000;
+        int velocity = 480.0/1.0;
         NSLog(@"Velocity: %i", velocity);
-        float realMoveDuration = self.size.width / velocity;*/
-        SKAction *actionMove = [SKAction moveTo:location duration:0.45];
+        float realMoveDuration = self.size.width / velocity;
+        SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
         [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
         
     }
