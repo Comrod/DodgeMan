@@ -16,6 +16,7 @@
     {
         /* Setup your scene here */
         
+        //Background Color
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
         
         //Background
@@ -24,12 +25,16 @@
         background.name = @"BACKGROUND";*/
         
         //Character
+        self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
+        self.playerSprite.position = CGPointMake(self.playerSprite.size.width/2, self.frame.size.height/2);
+        [self addChild:self.playerSprite];
+        
         //SKSpriteNode *character = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         
         
         //Random label
         /*SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        myLabel.text = @"Hello, World!";d
+        myLabel.text = @"Hello, World!";
         myLabel.fontSize = 30;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));*/
@@ -46,7 +51,7 @@
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"player"];
         
         sprite.position = location;
         
