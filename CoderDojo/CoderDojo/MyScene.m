@@ -68,6 +68,7 @@ int score = 0;
     int maxY = self.frame.size.height - redBall.size.height / 2;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
+    NSLog(@"Actual Y: %i", actualY);
     
     //Initiates red ball offscreen
     if (actualY >= 75)
@@ -158,10 +159,10 @@ NSDate *startTime;
         }
         
         //Moves and animates player
-        int velocity = elapsedTime * -2500;
+        /*int velocity = elapsedTime * -2750;
         NSLog(@"Velocity: %i", velocity);
-        float realMoveDuration = self.size.width / velocity;
-        SKAction *actionMove = [SKAction moveTo:location duration:-0.45];
+        float realMoveDuration = self.size.width / velocity;*/
+        SKAction *actionMove = [SKAction moveTo:location duration:0.45];
         [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
         
     }
