@@ -10,7 +10,6 @@
 
 @interface MyScene : SKScene
 {
-    BOOL isTouching;
     int playerLocX;
     int playerLocY;
 }

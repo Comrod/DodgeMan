@@ -15,9 +15,10 @@
     if (self = [super initWithSize:size])
     {
         /* Setup your scene here */
+        
+        //Sets player location
         playerLocX = 50;
         playerLocY = 292;
-        isTouching = NO;
         
         //Background Color
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
@@ -44,48 +45,41 @@
     return self;
 }
 
+NSDate *startTime;
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     /* Called when a touch begins */
     [super touchesBegan:touches withEvent:event];
     
-    isTouching = YES;
+    //Starts Timer
+    startTime = [NSDate date];
     
-    for (UITouch *touch in touches)
-    {
-        CGPoint location = [touch locationInNode:self];
-        
-        //self.playerSprite.position = location;
-        
-        /*if (location.x < self.playerSprite.position.x)
-        {
-            NSLog(@"Touched to left of character");
-            self.playerSprite.position = CGPointMake(playerLocX - 2, playerLocY);
-            NSLog(@"Player Location X: %i", playerLocX);
-        }
-        else if (location.x > self.playerSprite.position.x)
-        {
-            NSLog(@"Touched to  right of character");
-            self.playerSprite.position = CGPointMake(playerLocX + 2, playerLocY);
-            NSLog(@"Player Location X: %i", playerLocX);
-        }*/
-        
-        NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
-        SKAction *actionMove = [SKAction moveTo:location duration:0.5];
-        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
-        
-        //SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        //[sprite runAction:[SKAction repeatActionForever:action]];
-        
-        //[self addChild:sprite];
-    }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    /* Called when a touch ends */
     [super touchesEnded:touches withEvent:event];
-    isTouching = NO;
+    
+    NSTimeInterval elapsedTime = [startTime timeIntervalSinceNow];
+    NSString *elapsedTimeString = [NSString stringWithFormat:@"Elapsed time: %f", elapsedTime];
+    NSLog(@"%@", elapsedTimeString);
+    
+    for (UITouch *touch in touches)
+    {
+        //Gets location of touch
+        CGPoint location = [touch locationInNode:self];
+        NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
+        
+        //Moves and animates player
+        int velocity = elapsedTime * -1500;
+        NSLog(@"Velocity: %i", velocity);
+        float realMoveDuration = self.size.width / velocity;
+        SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
+        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
+    }
+    
     NSLog(@"Touch ended");
 }
 
