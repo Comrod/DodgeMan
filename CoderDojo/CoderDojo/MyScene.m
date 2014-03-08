@@ -55,7 +55,7 @@
     {
         CGPoint location = [touch locationInNode:self];
         
-        self.playerSprite.position = location;
+        //self.playerSprite.position = location;
         
         /*if (location.x < self.playerSprite.position.x)
         {
@@ -71,8 +71,8 @@
         }*/
         
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
-        SKAction
-        
+        SKAction *actionMove = [SKAction moveTo:location duration:0.5];
+        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
         
         //SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
         
