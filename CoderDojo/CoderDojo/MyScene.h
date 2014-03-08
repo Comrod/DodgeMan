@@ -8,13 +8,16 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface MyScene : SKScene
+@interface MyScene : SKScene <SKPhysicsContactDelegate>
 {
     int playerLocX;
     int playerLocY;
+    BOOL isActionCompleted;
 }
 
 
 @property SKSpriteNode *playerSprite;
+@property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
+@property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 
 @end

@@ -28,6 +28,8 @@
 		241AF87D18CB749F00AA7AF9 /* player.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87C18CB749F00AA7AF9 /* player.png */; };
 		241AF87F18CB754900AA7AF9 /* character@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF87E18CB754900AA7AF9 /* character@2x.png */; };
 		241AF88118CB757A00AA7AF9 /* character.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88018CB757A00AA7AF9 /* character.png */; };
+		241AF88518CB84D200AA7AF9 /* locationIndicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88318CB84D200AA7AF9 /* locationIndicator@2x.png */; };
+		241AF88718CB854000AA7AF9 /* locationIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88618CB854000AA7AF9 /* locationIndicator.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,8 @@
 		241AF87C18CB749F00AA7AF9 /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		241AF87E18CB754900AA7AF9 /* character@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "character@2x.png"; sourceTree = "<group>"; };
 		241AF88018CB757A00AA7AF9 /* character.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = character.png; sourceTree = "<group>"; };
+		241AF88318CB84D200AA7AF9 /* locationIndicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "locationIndicator@2x.png"; sourceTree = "<group>"; };
+		241AF88618CB854000AA7AF9 /* locationIndicator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationIndicator.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 		241AF87B18CB748500AA7AF9 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				241AF88318CB84D200AA7AF9 /* locationIndicator@2x.png */,
+				241AF88618CB854000AA7AF9 /* locationIndicator.png */,
 				241AF87E18CB754900AA7AF9 /* character@2x.png */,
 				241AF88018CB757A00AA7AF9 /* character.png */,
 				241AF87918CB746E00AA7AF9 /* player@2x.png */,
@@ -260,11 +266,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				241AF88718CB854000AA7AF9 /* locationIndicator.png in Resources */,
 				241AF87D18CB749F00AA7AF9 /* player.png in Resources */,
 				241AF87618CB6B6000AA7AF9 /* backgroundiP5.png in Resources */,
 				241AF87F18CB754900AA7AF9 /* character@2x.png in Resources */,
 				241AF87A18CB746E00AA7AF9 /* player@2x.png in Resources */,
 				241AF84618CB67C600AA7AF9 /* InfoPlist.strings in Resources */,
+				241AF88518CB84D200AA7AF9 /* locationIndicator@2x.png in Resources */,
 				241AF88118CB757A00AA7AF9 /* character.png in Resources */,
 				241AF85918CB67C600AA7AF9 /* Images.xcassets in Resources */,
 				241AF84F18CB67C600AA7AF9 /* Main.storyboard in Resources */,
