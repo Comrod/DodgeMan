@@ -9,8 +9,8 @@
 #import "MyScene.h"
 #import "EndGameScene.h"
 
-static const uint32_t redBallCategory     =  0x1 << 0;
-static const uint32_t playerCategory    =  0x1 << 1;
+static const uint32_t redBallCategory =  0x1 << 0;
+static const uint32_t playerCategory =  0x1 << 1;
 
 int score = 0;
 
@@ -33,10 +33,17 @@ int score = 0;
         background.yScale = 0.5;
         [self addChild:background];
         
-        //Character
+        //Player
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         self.playerSprite.position = CGPointMake(playerLocX, playerLocY);
         [self addChild:self.playerSprite];
+        
+        self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        self.scoreLabel.text = @"0";
+        self.scoreLabel.fontSize = 40;
+        self.scoreLabel.fontColor = [SKColor blackColor];
+        self.scoreLabel.position = CGPointMake(50, 260);
+        [self addChild:self.scoreLabel];
         
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
@@ -87,6 +94,8 @@ int score = 0;
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *ballCross = [SKAction runBlock:^{
         score++;
+        self.scoreString = [NSString stringWithFormat:@"%i", score];
+        self.scoreLabel.text = self.scoreString;
         NSLog(@"Score was incremented. Score is now %d", score);
     }];
     [redBall runAction:[SKAction sequence:@[actionMove, ballCross, actionMoveDone]]];

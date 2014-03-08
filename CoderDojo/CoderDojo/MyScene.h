@@ -17,7 +17,10 @@
 
 
 @property SKSpriteNode *playerSprite;
+@property SKLabelNode *scoreLabel;
+@property NSString *scoreString;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+
 
 @end
