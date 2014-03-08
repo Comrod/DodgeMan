@@ -7,6 +7,7 @@
 //
 
 #import "MyScene.h"
+#import "EndGameScene.h"
 
 static const uint32_t redBallCategory     =  0x1 << 0;
 static const uint32_t playerCategory    =  0x1 << 1;
@@ -23,10 +24,14 @@ int score = 0;
         
         //Sets player location
         playerLocX = 50;
-        playerLocY = 180;
+        playerLocY = 89;
         
-        //Background Color
-        self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
+        //Set Background
+        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiP5"];
+        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        background.xScale = 0.5;
+        background.yScale = 0.5;
+        [self addChild:background];
         
         //Character
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
@@ -56,11 +61,15 @@ int score = 0;
     int maxY = self.frame.size.height - redBall.size.height / 2;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
+    NSLog(@"Actual Y: %i", actualY);
     
     //Initiates red ball offscreen
-    redBall.position = CGPointMake(self.frame.size.width + redBall.size.width/2, actualY);
-    [self addChild:redBall];
-    
+    if (actualY >= 69)
+    {
+        //Prevents balls from spawning in the ground
+        redBall.position = CGPointMake(self.frame.size.width + redBall.size.width/2, actualY);
+        [self addChild:redBall];
+    }
     redBall.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:redBall.size.width/2];
     redBall.physicsBody.dynamic = YES;
     redBall.physicsBody.categoryBitMask = redBallCategory;
@@ -100,7 +109,7 @@ int score = 0;
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
     self.lastUpdateTimeInterval = currentTime;
     if (timeSinceLast > 1) { // more than a second since last update
-        timeSinceLast = 1.0 / 60.0;
+        timeSinceLast = 1.0 / 120.0;
         self.lastUpdateTimeInterval = currentTime;
     }
     
@@ -134,28 +143,32 @@ NSDate *startTime;
         CGPoint location = [touch locationInNode:self];
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
         
+        //Sets ground
+        if (location.y < 89)
+        {
+            location.y = 89;
+        }
         
         //Moves and animates player
-        int velocity = elapsedTime * -2500;
+        /*int velocity = elapsedTime * -2750;
         NSLog(@"Velocity: %i", velocity);
-        float realMoveDuration = self.size.width / velocity;
-        SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
-        //[self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
-        
-        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]completion:^{
-            isActionCompleted = YES;
-        }];
+        float realMoveDuration = self.size.width / velocity;*/
+        SKAction *actionMove = [SKAction moveTo:location duration:0.45];
+        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
         
     }
     NSLog(@"Touch ended");
 }
 
-- (void)redBall:(SKSpriteNode *)redBall didCollideWithPlayer:(SKSpriteNode *)playerSprite {
-    NSLog(@"Hit");
+- (void)redBall:(SKSpriteNode *)redBall didCollideWithPlayer:(SKSpriteNode *)playerSprite
+{
+    NSLog(@"Player died");
     [redBall removeFromParent];
     [playerSprite removeFromParent];
     
-    NSLog(@"You died");
+    SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
+    SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size gameEnded:YES];
+    [self.view presentScene:endGameScene transition: reveal];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
