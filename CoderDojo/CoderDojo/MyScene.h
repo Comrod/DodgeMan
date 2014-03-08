@@ -9,6 +9,12 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface MyScene : SKScene
+{
+    BOOL isTouching;
+    int playerLocX;
+    int playerLocY;
+}
+
 
 @property SKSpriteNode *playerSprite;
 
