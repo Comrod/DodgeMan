@@ -55,14 +55,14 @@
     if ([node.name isEqualToString:@"pauseButton"])
     {
         NSLog(@"Pause button pressed");
+        MyScene *myScene2 = [MyScene new];
+        myScene2.wasJustPaused = TRUE;
+        
         //SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
         SKScene *myScene = [[MyScene alloc] initWithSize:self.size];
         [self.view presentScene:myScene transition:nil];
         
-        /*MyScene *myScene2 = [MyScene new];
-        myScene2.score = [myScene2.dataStorage integerForKey:@"scoreKey"];
-        myScene2.scoreString = [NSString stringWithFormat:@"%i", myScene2.score];
-        myScene2.scoreLabel.text = myScene2.scoreString;*/
+        
     }
 }
 

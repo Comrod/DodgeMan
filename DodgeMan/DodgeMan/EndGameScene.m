@@ -56,6 +56,9 @@
         
         MyScene *myScene = [MyScene new];
         myScene.wasJustPaused = NO;
+        myScene.paused = 0;
+        [myScene.dataStorage setInteger:myScene.paused forKey:@"pausedKey"];
+        
     }
     return self;
 }

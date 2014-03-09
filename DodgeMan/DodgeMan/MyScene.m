@@ -19,13 +19,21 @@ static const uint32_t playerCategory =  0x1 << 1;
 {
     if (self = [super initWithSize:size])
     {
+        //Initiates dataStorage
+        self.dataStorage = [NSUserDefaults standardUserDefaults];
+        
+        
         //Sets player score; doesn't reset score if from pause menu
-        if (self.wasJustPaused)
+        self.paused = [self.dataStorage integerForKey:@"pausedKey"];
+        
+        if (self.paused == 1)
         {
+            NSLog(@"Was just paused");
             //Retreive and set score
             self.score = [self.dataStorage integerForKey:@"scoreKey"];
             self.scoreString = [NSString stringWithFormat:@"%i", self.score];
             self.scoreLabel.text = self.scoreString;
+            NSLog(@"Score is %@", self.scoreLabel);
             
             //Retrieve position
             self.posX = [self.dataStorage integerForKey:@"posXKey"];
@@ -33,20 +41,15 @@ static const uint32_t playerCategory =  0x1 << 1;
         }
         else
         {
+            NSLog(@"Was not just paused");
             self.score = 0;
             [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
-            
+            NSLog(@"Score is %i", self.score);
             //Sets player location
             self.posX = 50;
             self.posY = 100;
         }
         
-        
-        //Initiates dataStorage
-        self.dataStorage = [NSUserDefaults standardUserDefaults];
-        
-        self.score = [self.dataStorage integerForKey:@"scoreKey"];
-        NSLog(@"Score: %i", self.score);
         
         //Set Background
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
@@ -190,6 +193,8 @@ NSDate *startTime;
         self.posY = self.playerSprite.position.y;
         [self.dataStorage setInteger:self.posX forKey:@"posXKey"];
         [self.dataStorage setInteger:self.posY forKey:@"posYKey"];
+        self.paused = 1;
+        [self.dataStorage setInteger:self.paused forKey:@"pausedKey"];
         
         SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
         SKScene *pauseScene = [[PauseScene alloc] initWithSize:self.size];
