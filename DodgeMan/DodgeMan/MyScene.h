@@ -14,6 +14,24 @@
     int playerLocY;
     int score;
     BOOL isActionCompleted;
+    
+    BOOL didTapLeft;
+    
+    BOOL didRunFalling;
+    BOOL isMoving;
+    
+    //Gravity
+    CGPoint fallDirection;
+    CGPoint fallAmount;
+    CGPoint fallDestination;
+    CGPoint fallDestinationReal;
+    CGPoint locationTouched;
+    CGPoint initialPos;
+    BOOL isGravityOccurring;
+    BOOL isPlayerInGround;
+    
+    NSTimeInterval elapsedTime;
+    NSString *elapsedTimeString;
 }
 
 
@@ -23,6 +41,5 @@
 @property NSString *scoreString;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-
 
 @end
