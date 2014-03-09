@@ -13,9 +13,7 @@
     int playerLocX;
     int playerLocY;
     int score;
-    BOOL isActionCompleted;
 }
-
 
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;

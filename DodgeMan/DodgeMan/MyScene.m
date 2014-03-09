@@ -11,6 +11,7 @@
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
+static const uint32_t groundCategory =  0x1 << 2;
 
 @implementation MyScene
 
@@ -22,17 +23,28 @@ static const uint32_t playerCategory =  0x1 << 1;
         
         //Sets player location
         playerLocX = 50;
-        playerLocY = 89;
+        playerLocY = 88;
         
         //Sets player score
         score = 0;
         
         //Set Background
-        SKSpriteNode *background = [SKSpriteNode spriteNodeWithImageNamed:@"backgroundiP5"];
-        background.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-        background.xScale = 0.5;
-        background.yScale = 0.5;
-        [self addChild:background];
+        self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
+        
+        //Set Ground
+        SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground"];
+        ground.position = CGPointMake(CGRectGetMidX(self.frame), 34);
+        ground.xScale = 0.5;
+        ground.yScale = 0.5;
+        [self addChild:ground];
+        
+        //Set Ground Physics
+        ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
+        ground.physicsBody.dynamic = NO;
+        ground.physicsBody.categoryBitMask = groundCategory;
+        ground.physicsBody.contactTestBitMask = playerCategory;
+        ground.physicsBody.collisionBitMask = 0;
+        ground.physicsBody.usesPreciseCollisionDetection = YES;
         
         //Player
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
@@ -171,9 +183,9 @@ NSDate *startTime;
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
         
         //Sets ground
-        if (location.y < 89)
+        if (location.y < 88)
         {
-            location.y = 89;
+            location.y = 88;
         }
         
         //Moves and animates player
@@ -188,6 +200,7 @@ NSDate *startTime;
     NSLog(@"Touch ended");
 }
 
+//Collision between ball and player
 - (void)redBall:(SKSpriteNode *)redBall didCollideWithPlayer:(SKSpriteNode *)playerSprite
 {
     NSLog(@"Player died");
@@ -197,6 +210,12 @@ NSDate *startTime;
     SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
     SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size gameEnded:YES];
     [self.view presentScene:endGameScene transition: reveal];
+}
+
+//Collision between Player and Ground
+- (void)playerSprite:(SKSpriteNode *)playerSprite didCollideWithGround:(SKSpriteNode *)ground
+{
+    NSLog(@"Player hit the ground");
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
@@ -214,9 +233,17 @@ NSDate *startTime;
         secondBody = contact.bodyA;
     }
     
+    //Red ball collides with the player
     if ((firstBody.categoryBitMask & redBallCategory) != 0 && (secondBody.categoryBitMask & playerCategory) != 0)
     {
         [self redBall:(SKSpriteNode *) firstBody.node didCollideWithPlayer:(SKSpriteNode *) secondBody.node];
+    }
+    
+    //Player collides with ground
+    if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & groundCategory) != 0)
+    {
+        [self playerSprite:(SKSpriteNode *) firstBody.node didCollideWithGround:(SKSpriteNode *) secondBody.node];
+        NSLog(@"Player is in ground");
     }
 }
 
