@@ -13,6 +13,7 @@
     int playerLocX;
     int playerLocY;
     int score;
+    
 }
 
 @property SKSpriteNode *playerSprite;
