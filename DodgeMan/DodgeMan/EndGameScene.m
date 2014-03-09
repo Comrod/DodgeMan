@@ -24,8 +24,9 @@
         
         NSString *message;
         NSString *message2;
-        if (gameEnded) {
-            message = @"You Died!";
+        if (gameEnded)
+        {
+            message = @"You Died";
             message2 = @"Play Again?";
         }
         
@@ -53,6 +54,8 @@
                               ]]
          ];
         
+        MyScene *myScene = [MyScene new];
+        myScene.wasJustPaused = NO;
     }
     return self;
 }

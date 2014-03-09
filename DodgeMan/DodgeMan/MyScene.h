@@ -9,12 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
-{
-    int playerLocX;
-    int playerLocY;
-    int score;
-    
-}
 
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;
@@ -22,6 +16,10 @@
 @property NSString *scoreString;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-
+@property BOOL wasJustPaused;
+@property int score;
+@property NSUserDefaults *dataStorage;
+@property int posX;
+@property int posY;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "MyScene.h"
 #import "EndGameScene.h"
+#import "PauseScene.h"
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
@@ -18,14 +19,34 @@ static const uint32_t playerCategory =  0x1 << 1;
 {
     if (self = [super initWithSize:size])
     {
-        /* Setup your scene here */
+        //Sets player score; doesn't reset score if from pause menu
+        if (self.wasJustPaused)
+        {
+            //Retreive and set score
+            self.score = [self.dataStorage integerForKey:@"scoreKey"];
+            self.scoreString = [NSString stringWithFormat:@"%i", self.score];
+            self.scoreLabel.text = self.scoreString;
+            
+            //Retrieve position
+            self.posX = [self.dataStorage integerForKey:@"posXKey"];
+            self.posY = [self.dataStorage integerForKey:@"posYKey"];
+        }
+        else
+        {
+            self.score = 0;
+            [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
+            
+            //Sets player location
+            self.posX = 50;
+            self.posY = 100;
+        }
         
-        //Sets player location
-        playerLocX = 50;
-        playerLocY = 100;
         
-        //Sets player score
-        score = 0;
+        //Initiates dataStorage
+        self.dataStorage = [NSUserDefaults standardUserDefaults];
+        
+        self.score = [self.dataStorage integerForKey:@"scoreKey"];
+        NSLog(@"Score: %i", self.score);
         
         //Set Background
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
@@ -40,11 +61,11 @@ static const uint32_t playerCategory =  0x1 << 1;
 
         //Player
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
-        self.playerSprite.position = CGPointMake(playerLocX, playerLocY);
+        self.playerSprite.position = CGPointMake(self.posX, self.posY);
         
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
-        self.playerSprite.physicsBody.dynamic = YES;
+        self.playerSprite.physicsBody.dynamic = NO;
         self.playerSprite.physicsBody.categoryBitMask = playerCategory;
         self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
         self.playerSprite.physicsBody.collisionBitMask = 0;
@@ -66,7 +87,7 @@ static const uint32_t playerCategory =  0x1 << 1;
         [self addChild:ground];
         [self addChild:self.playerSprite];
         [self addChild:self.scoreLabel];
-        //[self addChild:self.pauseButton];
+        [self addChild:self.pauseButton];
         
         //Sets gravity
         self.physicsWorld.gravity = CGVectorMake(0,-2);
@@ -83,7 +104,6 @@ static const uint32_t playerCategory =  0x1 << 1;
     int maxY = self.frame.size.height - redBall.size.height / 2;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
-    NSLog(@"Actual Y: %i", actualY);
     
     //Initiates red ball offscreen
     if (actualY >= 75)
@@ -110,10 +130,12 @@ static const uint32_t playerCategory =  0x1 << 1;
     SKAction *actionMove = [SKAction moveTo:CGPointMake(-redBall.size.width/2, actualY) duration:actualDuration];
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *ballCross = [SKAction runBlock:^{
-        score++;
-        self.scoreString = [NSString stringWithFormat:@"%i", score];
+        self.score++;
+        [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
+        self.score = [self.dataStorage integerForKey:@"scoreKey"];
+        self.scoreString = [NSString stringWithFormat:@"%i", self.score];
         self.scoreLabel.text = self.scoreString;
-        NSLog(@"Score was incremented. Score is now %d", score);
+        NSLog(@"Score was incremented. Score is now %d", self.score);
     }];
     [redBall runAction:[SKAction sequence:@[actionMove, ballCross, actionMoveDone]]];
 }
@@ -160,6 +182,18 @@ NSDate *startTime;
     if ([node.name isEqualToString:@"pauseButton"])
     {
         NSLog(@"Pause button pressed");
+        self.wasJustPaused = YES;
+        
+        [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
+        
+        self.posX = self.playerSprite.position.x;
+        self.posY = self.playerSprite.position.y;
+        [self.dataStorage setInteger:self.posX forKey:@"posXKey"];
+        [self.dataStorage setInteger:self.posY forKey:@"posYKey"];
+        
+        SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
+        SKScene *pauseScene = [[PauseScene alloc] initWithSize:self.size];
+        [self.view presentScene:pauseScene transition: reveal];
     }
     
 }

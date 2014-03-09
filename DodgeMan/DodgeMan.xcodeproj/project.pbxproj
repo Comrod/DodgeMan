@@ -32,6 +32,7 @@
 		241AF88718CB854000AA7AF9 /* locationIndicator.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88618CB854000AA7AF9 /* locationIndicator.png */; };
 		241AF88A18CBA95D00AA7AF9 /* EndGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF88918CBA95D00AA7AF9 /* EndGameScene.m */; };
 		241AF88C18CBBE0E00AA7AF9 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88B18CBBE0E00AA7AF9 /* pauseButton.png */; };
+		241AF89118CD101C00AA7AF9 /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF89018CD101C00AA7AF9 /* PauseScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		241AF88818CBA95D00AA7AF9 /* EndGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndGameScene.h; sourceTree = "<group>"; };
 		241AF88918CBA95D00AA7AF9 /* EndGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGameScene.m; sourceTree = "<group>"; };
 		241AF88B18CBBE0E00AA7AF9 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
+		241AF88F18CD101C00AA7AF9 /* PauseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseScene.h; sourceTree = "<group>"; };
+		241AF89018CD101C00AA7AF9 /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +150,8 @@
 				241AF85418CB67C600AA7AF9 /* MyScene.m */,
 				241AF88818CBA95D00AA7AF9 /* EndGameScene.h */,
 				241AF88918CBA95D00AA7AF9 /* EndGameScene.m */,
+				241AF88F18CD101C00AA7AF9 /* PauseScene.h */,
+				241AF89018CD101C00AA7AF9 /* PauseScene.m */,
 				241AF87B18CB748500AA7AF9 /* Textures */,
 				241AF85818CB67C600AA7AF9 /* Images.xcassets */,
 				241AF84218CB67C600AA7AF9 /* Supporting Files */,
@@ -308,6 +313,7 @@
 				241AF84C18CB67C600AA7AF9 /* AppDelegate.m in Sources */,
 				241AF88A18CBA95D00AA7AF9 /* EndGameScene.m in Sources */,
 				241AF84818CB67C600AA7AF9 /* main.m in Sources */,
+				241AF89118CD101C00AA7AF9 /* PauseScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
