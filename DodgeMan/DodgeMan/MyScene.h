@@ -9,17 +9,20 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface MyScene : SKScene <SKPhysicsContactDelegate>
+{
+    NSDate *startTime;
+}
 
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;
 @property SKSpriteNode *pauseButton;
 @property NSString *scoreString;
+@property SKLabelNode *pauseLabel;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-@property BOOL wasJustPaused;
 @property int score;
-@property NSUserDefaults *dataStorage;
-@property int posX;
-@property int posY;
+@property float posX;
+@property float posY;
+@property NSUserDefaults *storeData;
 
 @end

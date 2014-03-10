@@ -8,7 +8,6 @@
 
 #import "MyScene.h"
 #import "EndGameScene.h"
-#import "PauseScene.h"
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
@@ -19,37 +18,7 @@ static const uint32_t playerCategory =  0x1 << 1;
 {
     if (self = [super initWithSize:size])
     {
-        //Initiates dataStorage
-        self.dataStorage = [NSUserDefaults standardUserDefaults];
-        
-        
-        //Sets player score; doesn't reset score if from pause menu
-        self.paused = [self.dataStorage integerForKey:@"pausedKey"];
-        
-        if (self.paused == 1)
-        {
-            NSLog(@"Was just paused");
-            //Retreive and set score
-            self.score = [self.dataStorage integerForKey:@"scoreKey"];
-            self.scoreString = [NSString stringWithFormat:@"%i", self.score];
-            self.scoreLabel.text = self.scoreString;
-            NSLog(@"Score is %@", self.scoreLabel);
-            
-            //Retrieve position
-            self.posX = [self.dataStorage integerForKey:@"posXKey"];
-            self.posY = [self.dataStorage integerForKey:@"posYKey"];
-        }
-        else
-        {
-            NSLog(@"Was not just paused");
-            self.score = 0;
-            [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
-            NSLog(@"Score is %i", self.score);
-            //Sets player location
-            self.posX = 50;
-            self.posY = 100;
-        }
-        
+        self.storeData = [NSUserDefaults standardUserDefaults];
         
         //Set Background
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
@@ -63,6 +32,8 @@ static const uint32_t playerCategory =  0x1 << 1;
         ground.physicsBody.dynamic = NO;
 
         //Player
+        self.posX = 50;
+        self.posY = 87.5;
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         self.playerSprite.position = CGPointMake(self.posX, self.posY);
         
@@ -86,6 +57,18 @@ static const uint32_t playerCategory =  0x1 << 1;
         self.pauseButton.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 40);
         self.pauseButton.name = @"pauseButton";
         
+        //Pause Label
+        NSString *pauseMessage;
+        pauseMessage = @"Game Paused";
+        self.pauseLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
+        self.pauseLabel.text = pauseMessage;
+        self.pauseLabel.fontSize = 40;
+        self.pauseLabel.fontColor = [SKColor blackColor];
+        self.pauseLabel.position = CGPointMake(self.size.width/2, self.size.height/2);
+        
+        //Set score
+        self.score = 0;
+        
         //Add nodes
         [self addChild:ground];
         [self addChild:self.playerSprite];
@@ -100,6 +83,7 @@ static const uint32_t playerCategory =  0x1 << 1;
     return self;
 }
 
+//Add Red Ball
 -(void)addBall
 {
     SKSpriteNode *redBall = [SKSpriteNode spriteNodeWithImageNamed:@"locationIndicator"];
@@ -134,13 +118,17 @@ static const uint32_t playerCategory =  0x1 << 1;
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *ballCross = [SKAction runBlock:^{
         self.score++;
-        [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
-        self.score = [self.dataStorage integerForKey:@"scoreKey"];
         self.scoreString = [NSString stringWithFormat:@"%i", self.score];
         self.scoreLabel.text = self.scoreString;
         NSLog(@"Score was incremented. Score is now %d", self.score);
     }];
     [redBall runAction:[SKAction sequence:@[actionMove, ballCross, actionMoveDone]]];
+}
+
+- (void)pauseScene
+{
+    self.paused = YES;
+    [self addChild:self.pauseLabel];
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
@@ -152,22 +140,20 @@ static const uint32_t playerCategory =  0x1 << 1;
     }
 }
 
+//Update Loop
 -(void)update:(CFTimeInterval)currentTime
 {
     /* Called before each frame is rendered */
     // Handle time delta.
-    //Prevents bad stuff happening
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
     self.lastUpdateTimeInterval = currentTime;
-    if (timeSinceLast > 1) { // more than a second since last update
+    if (timeSinceLast > 1) { //More than a second since last update
         timeSinceLast = 1.0 / 120.0;
         self.lastUpdateTimeInterval = currentTime;
     }
     
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
 }
-
-NSDate *startTime;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -181,26 +167,20 @@ NSDate *startTime;
     CGPoint location = [touch locationInNode:self];
     SKNode *node = [self nodeAtPoint:location];
     
-    //Pauses Scene
+    //Runs when pause button is pressed
     if ([node.name isEqualToString:@"pauseButton"])
     {
         NSLog(@"Pause button pressed");
-        self.wasJustPaused = YES;
-        
-        [self.dataStorage setInteger:self.score forKey:@"scoreKey"];
-        
-        self.posX = self.playerSprite.position.x;
-        self.posY = self.playerSprite.position.y;
-        [self.dataStorage setInteger:self.posX forKey:@"posXKey"];
-        [self.dataStorage setInteger:self.posY forKey:@"posYKey"];
-        self.paused = 1;
-        [self.dataStorage setInteger:self.paused forKey:@"pausedKey"];
-        
-        SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
-        SKScene *pauseScene = [[PauseScene alloc] initWithSize:self.size];
-        [self.view presentScene:pauseScene transition: reveal];
+        if (!self.paused)
+        {
+            [self pauseScene];
+        }
+        else if (self.paused)
+        {
+            self.paused = NO;
+            [self.pauseLabel removeFromParent];
+        }
     }
-    
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -226,8 +206,7 @@ NSDate *startTime;
         }
         
         //Moves and animates player
-        //int velocity = elapsedTime * -3000;
-        int velocity = 800.0/1.0;
+        int velocity = 1000.0/1.0;
         NSLog(@"Velocity: %i", velocity);
         float realMoveDuration = self.size.width / velocity;
         SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
@@ -237,15 +216,19 @@ NSDate *startTime;
     NSLog(@"Touch ended");
 }
 
-//Collision between ball and player
+//Collision between ball and player - player dies
 - (void)redBall:(SKSpriteNode *)redBall didCollideWithPlayer:(SKSpriteNode *)playerSprite
 {
+    
     NSLog(@"Player died");
     [redBall removeFromParent];
     [playerSprite removeFromParent];
     
-    SKTransition *reveal = [SKTransition crossFadeWithDuration:0.5];
-    SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size gameEnded:YES];
+    //Stores Final score
+    [self.storeData setObject:self.scoreString forKey:@"scoreStringKey"];
+    
+    SKTransition *reveal = [SKTransition fadeWithDuration:0.5];
+    SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size];
     [self.view presentScene:endGameScene transition: reveal];
 }
 
@@ -268,6 +251,7 @@ NSDate *startTime;
     if ((firstBody.categoryBitMask & redBallCategory) != 0 && (secondBody.categoryBitMask & playerCategory) != 0)
     {
         [self redBall:(SKSpriteNode *) firstBody.node didCollideWithPlayer:(SKSpriteNode *) secondBody.node];
+        NSLog(@"Player and ball collided");
     }
 }
 

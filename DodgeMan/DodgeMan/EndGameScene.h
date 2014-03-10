@@ -9,7 +9,10 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface EndGameScene : SKScene
+{
+    NSString *finalScore;
+}
 
--(id)initWithSize:(CGSize)size gameEnded:(BOOL)gameEnded;
+-(id)initWithSize:(CGSize)size;
 
 @end
