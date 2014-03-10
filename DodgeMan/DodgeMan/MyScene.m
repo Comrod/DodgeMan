@@ -33,7 +33,7 @@ static const uint32_t playerCategory =  0x1 << 1;
 
         //Player
         self.posX = 50;
-        self.posY = 87.5;
+        self.posY = 88;
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         self.playerSprite.position = CGPointMake(self.posX, self.posY);
         
@@ -134,7 +134,7 @@ static const uint32_t playerCategory =  0x1 << 1;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
     self.lastSpawnTimeInterval += timeSinceLast;
-    if (self.lastSpawnTimeInterval > 0.5) {
+    if (self.lastSpawnTimeInterval > 0.35) {
         self.lastSpawnTimeInterval = 0;
         [self addBall];
     }
@@ -202,7 +202,7 @@ static const uint32_t playerCategory =  0x1 << 1;
         //Prevents destination from being in the ground
         if (location.y < 88)
         {
-            location.y = 87.5;
+            location.y = 88;
         }
         
         //Moves and animates player
