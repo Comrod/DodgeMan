@@ -18,7 +18,12 @@ static const uint32_t playerCategory =  0x1 << 1;
 {
     if (self = [super initWithSize:size])
     {
+        //Sets up data storage
         self.storeData = [NSUserDefaults standardUserDefaults];
+        
+        //Sets gravity
+        self.physicsWorld.gravity = CGVectorMake(0,-2);
+        self.physicsWorld.contactDelegate = self;
         
         //Set Background
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
@@ -30,6 +35,7 @@ static const uint32_t playerCategory =  0x1 << 1;
         ground.yScale = 0.5;
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
         ground.physicsBody.dynamic = NO;
+        ground.physicsBody.usesPreciseCollisionDetection = YES;
 
         //Player
         self.posX = 50;
@@ -74,10 +80,6 @@ static const uint32_t playerCategory =  0x1 << 1;
         [self addChild:self.playerSprite];
         [self addChild:self.scoreLabel];
         [self addChild:self.pauseButton];
-        
-        //Sets gravity
-        self.physicsWorld.gravity = CGVectorMake(0,-2);
-        self.physicsWorld.contactDelegate = self;
         
     }
     return self;
