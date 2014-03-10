@@ -1,6 +1,6 @@
 //
-//  CoderDojoTests.m
-//  CoderDojoTests
+//  DodgeManTests.m
+//  DodgeManTests
 //
 //  Created by Cormac Chester on 3/8/14.
 //  Copyright (c) 2014 Testman Industries. All rights reserved.
@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-@interface CoderDojoTests : XCTestCase
+@interface DodgeManTests : XCTestCase
 
 @end
 
-@implementation CoderDojoTests
+@implementation DodgeManTests
 
 - (void)setUp
 {

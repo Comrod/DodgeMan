@@ -11,6 +11,7 @@
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
+static const uint16_t groundCategory = 0x1 << 2;
 
 @implementation MyScene
 
@@ -35,6 +36,8 @@ static const uint32_t playerCategory =  0x1 << 1;
         ground.yScale = 0.5;
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
         ground.physicsBody.dynamic = NO;
+        ground.physicsBody.categoryBitMask = groundCategory;
+        ground.physicsBody.collisionBitMask = 1;
         ground.physicsBody.usesPreciseCollisionDetection = YES;
 
         //Player
@@ -45,7 +48,7 @@ static const uint32_t playerCategory =  0x1 << 1;
         
         //Set Player Physics
         self.playerSprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.playerSprite.size];
-        self.playerSprite.physicsBody.dynamic = NO;
+        self.playerSprite.physicsBody.dynamic = YES;
         self.playerSprite.physicsBody.categoryBitMask = playerCategory;
         self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
         self.playerSprite.physicsBody.collisionBitMask = 0;

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.m
-//  CoderDojo
+//  DodgeMan
 //
 //  Created by Cormac Chester on 3/8/14.
 //  Copyright (c) 2014 Testman Industries. All rights reserved.

@@ -465,19 +465,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoderDojo.app/CoderDojo";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DodgeMan.app/DodgeMan";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoderDojo/CoderDojo-Prefix.pch";
+				GCC_PREFIX_HEADER = "DodgeMan/DodgeMan-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "CoderDojoTests/DodgeManTests-Info.plist";
+				INFOPLIST_FILE = "DodgeManTests/DodgeManTests-Info.plist";
 				PRODUCT_NAME = DodgeManTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -488,15 +488,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoderDojo.app/CoderDojo";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DodgeMan.app/DodgeMan";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "CoderDojo/CoderDojo-Prefix.pch";
-				INFOPLIST_FILE = "CoderDojoTests/DodgeManTests-Info.plist";
+				GCC_PREFIX_HEADER = "DodgeMan/DodgeMan-Prefix.pch";
+				INFOPLIST_FILE = "DodgeManTests/DodgeManTests-Info.plist";
 				PRODUCT_NAME = DodgeManTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

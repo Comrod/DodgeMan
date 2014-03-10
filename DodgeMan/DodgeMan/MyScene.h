@@ -1,6 +1,6 @@
 //
 //  MyScene.h
-//  CoderDojo
+//  DodgeMan
 //
 
 //  Copyright (c) 2014 Testman Industries. All rights reserved.
