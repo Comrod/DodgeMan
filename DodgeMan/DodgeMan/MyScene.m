@@ -164,25 +164,6 @@ static const uint32_t playerCategory =  0x1 << 1;
     
     //Starts Timer
     startTime = [NSDate date];
-
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInNode:self];
-    SKNode *node = [self nodeAtPoint:location];
-    
-    //Runs when pause button is pressed
-    if ([node.name isEqualToString:@"pauseButton"])
-    {
-        NSLog(@"Pause button pressed");
-        if (!self.paused)
-        {
-            [self pauseScene];
-        }
-        else if (self.paused)
-        {
-            self.paused = NO;
-            [self.pauseLabel removeFromParent];
-        }
-    }
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -200,19 +181,37 @@ static const uint32_t playerCategory =  0x1 << 1;
         //Gets location of touch
         CGPoint location = [touch locationInNode:self];
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
+        SKNode *node = [self nodeAtPoint:location];
         
-        //Prevents destination from being in the ground
-        if (location.y < 88)
+        //Runs when pause button is pressed
+        if ([node.name isEqualToString:@"pauseButton"])
         {
-            location.y = 88;
+            NSLog(@"Pause button pressed");
+            if (!self.paused)
+            {
+                [self pauseScene];
+            }
+            else if (self.paused)
+            {
+                self.paused = NO;
+                [self.pauseLabel removeFromParent];
+            }
         }
-        
-        //Moves and animates player
-        int velocity = 1000.0/1.0;
-        NSLog(@"Velocity: %i", velocity);
-        float realMoveDuration = self.size.width / velocity;
-        SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
-        [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
+        else
+        {
+            //Prevents destination from being in the ground
+            if (location.y < 88)
+            {
+                location.y = 88;
+            }
+            
+            //Moves and animates player
+            int velocity = 1000.0/1.0;
+            NSLog(@"Velocity: %i", velocity);
+            float realMoveDuration = self.size.width / velocity;
+            SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
+            [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
+        }
     }
     
     NSLog(@"Touch ended");
