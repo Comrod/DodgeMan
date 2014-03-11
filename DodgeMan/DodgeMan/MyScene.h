@@ -16,6 +16,9 @@
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;
 @property SKSpriteNode *pauseButton;
+@property SKSpriteNode *ground;
+@property SKNode *tapLeft;
+@property SKNode *tapRight;
 @property NSString *scoreString;
 @property SKLabelNode *pauseLabel;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;

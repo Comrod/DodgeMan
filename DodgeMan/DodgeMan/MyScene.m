@@ -11,7 +11,7 @@
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
-static const uint16_t groundCategory = 0x1 << 2;
+static const uint32_t groundCategory =  0x1 << 2;
 
 @implementation MyScene
 
@@ -23,22 +23,23 @@ static const uint16_t groundCategory = 0x1 << 2;
         self.storeData = [NSUserDefaults standardUserDefaults];
         
         //Sets gravity
-        self.physicsWorld.gravity = CGVectorMake(0,-2);
+        self.physicsWorld.gravity = CGVectorMake(0,-2.0);
         self.physicsWorld.contactDelegate = self;
         
         //Set Background
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
         
         //Set Ground
-        SKSpriteNode *ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground"];
-        ground.position = CGPointMake(CGRectGetMidX(self.frame), 34);
-        ground.xScale = 0.5;
-        ground.yScale = 0.5;
-        ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
-        ground.physicsBody.dynamic = NO;
-        ground.physicsBody.categoryBitMask = groundCategory;
-        ground.physicsBody.collisionBitMask = 1;
-        ground.physicsBody.usesPreciseCollisionDetection = YES;
+        self.ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground"];
+        self.ground.position = CGPointMake(CGRectGetMidX(self.frame), 34);
+        self.ground.xScale = 0.5;
+        self.ground.yScale = 0.5;
+        self.ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.ground.size];
+        self.ground.physicsBody.dynamic = NO;
+        self.ground.physicsBody.categoryBitMask = groundCategory;
+        self.ground.physicsBody.contactTestBitMask = playerCategory;
+        self.ground.physicsBody.collisionBitMask = 0;
+        self.ground.physicsBody.usesPreciseCollisionDetection = YES;
 
         //Player
         self.posX = 50;
@@ -51,7 +52,7 @@ static const uint16_t groundCategory = 0x1 << 2;
         self.playerSprite.physicsBody.dynamic = YES;
         self.playerSprite.physicsBody.categoryBitMask = playerCategory;
         self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
-        self.playerSprite.physicsBody.collisionBitMask = 0;
+        self.playerSprite.physicsBody.collisionBitMask = groundCategory;
         self.playerSprite.physicsBody.usesPreciseCollisionDetection = YES;
         
         //Score Label
@@ -79,7 +80,7 @@ static const uint16_t groundCategory = 0x1 << 2;
         self.score = 0;
         
         //Add nodes
-        [self addChild:ground];
+        [self addChild:self.ground];
         [self addChild:self.playerSprite];
         [self addChild:self.scoreLabel];
         [self addChild:self.pauseButton];
@@ -257,6 +258,13 @@ static const uint16_t groundCategory = 0x1 << 2;
         [self redBall:(SKSpriteNode *) firstBody.node didCollideWithPlayer:(SKSpriteNode *) secondBody.node];
         NSLog(@"Player and ball collided");
     }
+    
+}
+
+- (void)didEndContact:(SKPhysicsContact *)contact
+{
+    NSLog(@"Contact ended");
+    self.playerSprite.physicsBody.velocity = CGVectorMake(0, 0);
 }
 
 @end
