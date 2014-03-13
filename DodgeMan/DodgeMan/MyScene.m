@@ -23,7 +23,7 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.storeData = [NSUserDefaults standardUserDefaults];
         
         //Sets gravity
-        self.physicsWorld.gravity = CGVectorMake(0,-2.0);
+        self.physicsWorld.gravity = CGVectorMake(0,-4.0);
         self.physicsWorld.contactDelegate = self;
         
         //Set Background
@@ -40,10 +40,12 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.ground.physicsBody.contactTestBitMask = playerCategory;
         self.ground.physicsBody.collisionBitMask = 0;
         self.ground.physicsBody.usesPreciseCollisionDetection = YES;
+        self.ground.physicsBody.friction = 0.0;
+        self.ground.name = @"ground";
 
         //Player
         self.posX = 50;
-        self.posY = 88;
+        self.posY = 88.5;
         self.playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         self.playerSprite.position = CGPointMake(self.posX, self.posY);
         
@@ -54,6 +56,9 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
         self.playerSprite.physicsBody.collisionBitMask = groundCategory;
         self.playerSprite.physicsBody.usesPreciseCollisionDetection = YES;
+        self.playerSprite.physicsBody.friction = 0.2;
+        self.playerSprite.physicsBody.linearDamping = 0.3;
+        self.playerSprite.physicsBody.allowsRotation = NO;
         
         //Score Label
         self.scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
@@ -78,6 +83,9 @@ static const uint32_t groundCategory =  0x1 << 2;
         
         //Set score
         self.score = 0;
+        
+        //Set lateral movement delta to 0
+        noLatMove = 0;
         
         //Add nodes
         [self addChild:self.ground];
@@ -140,7 +148,7 @@ static const uint32_t groundCategory =  0x1 << 2;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
     self.lastSpawnTimeInterval += timeSinceLast;
-    if (self.lastSpawnTimeInterval > 0.35) {
+    if (self.lastSpawnTimeInterval > 0.75) {
         self.lastSpawnTimeInterval = 0;
         [self addBall];
     }
@@ -157,37 +165,36 @@ static const uint32_t groundCategory =  0x1 << 2;
         timeSinceLast = 1.0 / 120.0;
         self.lastUpdateTimeInterval = currentTime;
     }
-    
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
+    
+    //Set current dy velocity
+    currentYMove = self.playerSprite.physicsBody.velocity.dy;
+    currentXMove = self.playerSprite.physicsBody.velocity.dx;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    isTouching = YES;
     /* Called when a touch begins */
     [super touchesBegan:touches withEvent:event];
     
-    //Starts Timer
-    startTime = [NSDate date];
-}
-
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    /* Called when a touch ends */
-    [super touchesEnded:touches withEvent:event];
-    
-    NSTimeInterval elapsedTime = [startTime timeIntervalSinceNow];
-    NSString *elapsedTimeString = [NSString stringWithFormat:@"Elapsed time: %f", elapsedTime];
-    NSLog(@"%@", elapsedTimeString);
-    
-    
     for (UITouch *touch in touches)
     {
-        //Gets location of touch
         CGPoint location = [touch locationInNode:self];
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
         SKNode *node = [self nodeAtPoint:location];
         
-        //Runs when pause button is pressed
+        if (location.x < self.playerSprite.position.x)
+        {
+            NSLog(@"Tapped left");
+            self.playerSprite.physicsBody.velocity = CGVectorMake(-100.0, currentYMove);
+        }
+        else if (location.x > self.playerSprite.position.x)
+        {
+             NSLog(@"Tapped right");
+            self.playerSprite.physicsBody.velocity = CGVectorMake(100.0, currentYMove);
+        }
+        
         if ([node.name isEqualToString:@"pauseButton"])
         {
             NSLog(@"Pause button pressed");
@@ -201,22 +208,27 @@ static const uint32_t groundCategory =  0x1 << 2;
                 [self.pauseLabel removeFromParent];
             }
         }
-        else
+        
+        if ([node.name isEqualToString:@"ground"])
         {
-            //Prevents destination from being in the ground
-            if (location.y < 88)
-            {
-                location.y = 88;
-            }
-            
-            //Moves and animates player
-            int velocity = 1000.0/1.0;
-            NSLog(@"Velocity: %i", velocity);
-            float realMoveDuration = self.size.width / velocity;
-            SKAction *actionMove = [SKAction moveTo:location duration:realMoveDuration];
-            [self.playerSprite runAction:[SKAction sequence:@[actionMove]]];
+            self.playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 200.0);
+            NSLog(@"Tapped on ground - moving player up");
         }
     }
+    
+    //Starts Timer
+    startTime = [NSDate date];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    isTouching = NO;
+    /* Called when a touch ends */
+    [super touchesEnded:touches withEvent:event];
+    
+    NSTimeInterval elapsedTime = [startTime timeIntervalSinceNow];
+    NSString *elapsedTimeString = [NSString stringWithFormat:@"Elapsed time: %f", elapsedTime];
+    NSLog(@"%@", elapsedTimeString);
     
     NSLog(@"Touch ended");
 }
@@ -264,7 +276,6 @@ static const uint32_t groundCategory =  0x1 << 2;
 - (void)didEndContact:(SKPhysicsContact *)contact
 {
     NSLog(@"Contact ended");
-    self.playerSprite.physicsBody.velocity = CGVectorMake(0, 0);
 }
 
 @end
