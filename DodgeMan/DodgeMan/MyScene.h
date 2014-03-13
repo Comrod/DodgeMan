@@ -12,9 +12,9 @@
 {
     NSDate *startTime;
     BOOL isTouching;
-    CGFloat noLatMove;
     CGFloat currentYMove;
     CGFloat currentXMove;
+    int jumpCounter;
 }
 
 @property SKSpriteNode *playerSprite;

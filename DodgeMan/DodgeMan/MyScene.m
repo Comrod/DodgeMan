@@ -84,8 +84,8 @@ static const uint32_t groundCategory =  0x1 << 2;
         //Set score
         self.score = 0;
         
-        //Set lateral movement delta to 0
-        noLatMove = 0;
+        //Sets jump counter
+        jumpCounter = 0;
         
         //Add nodes
         [self addChild:self.ground];
@@ -208,11 +208,14 @@ static const uint32_t groundCategory =  0x1 << 2;
                 [self.pauseLabel removeFromParent];
             }
         }
-        
-        if ([node.name isEqualToString:@"ground"])
+        else if ([node.name isEqualToString:@"ground"])
         {
-            self.playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 200.0);
-            NSLog(@"Tapped on ground - moving player up");
+            if (jumpCounter <= 1)
+            {
+                self.playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 250.0);
+                NSLog(@"Tapped on ground - moving player up");
+                jumpCounter++;
+            }
         }
     }
     
@@ -271,6 +274,13 @@ static const uint32_t groundCategory =  0x1 << 2;
         NSLog(@"Player and ball collided");
     }
     
+    //Red ball collides with the player
+    if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & groundCategory) != 0)
+    {
+        //Resets jump counter
+        jumpCounter = 0;
+        NSLog(@"Player and ball collided");
+    }
 }
 
 - (void)didEndContact:(SKPhysicsContact *)contact
