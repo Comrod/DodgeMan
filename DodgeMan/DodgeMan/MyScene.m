@@ -11,7 +11,7 @@
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
-static const uint32_t groundCategory =  0x1 << 2;
+static const uint32_t platformCategory =  0x1 << 2;
 
 @implementation MyScene
 
@@ -36,7 +36,7 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.ground.yScale = 0.5;
         self.ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.ground.size];
         self.ground.physicsBody.dynamic = NO;
-        self.ground.physicsBody.categoryBitMask = groundCategory;
+        self.ground.physicsBody.categoryBitMask = platformCategory;
         self.ground.physicsBody.contactTestBitMask = playerCategory;
         self.ground.physicsBody.collisionBitMask = 0;
         self.ground.physicsBody.usesPreciseCollisionDetection = YES;
@@ -54,9 +54,8 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.playerSprite.physicsBody.dynamic = YES;
         self.playerSprite.physicsBody.categoryBitMask = playerCategory;
         self.playerSprite.physicsBody.contactTestBitMask = redBallCategory;
-        self.playerSprite.physicsBody.collisionBitMask = groundCategory;
+        self.playerSprite.physicsBody.collisionBitMask = platformCategory;
         self.playerSprite.physicsBody.usesPreciseCollisionDetection = YES;
-        self.playerSprite.physicsBody.friction = 0.2;
         self.playerSprite.physicsBody.linearDamping = 0.3;
         self.playerSprite.physicsBody.allowsRotation = NO;
         
@@ -80,6 +79,20 @@ static const uint32_t groundCategory =  0x1 << 2;
         self.pauseLabel.fontSize = 40;
         self.pauseLabel.fontColor = [SKColor blackColor];
         self.pauseLabel.position = CGPointMake(self.size.width/2, self.size.height/2);
+        
+        //Reset Label
+        NSString *resetMessage;
+        resetMessage = @"Restart Game?";
+        self.resetLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
+        self.resetLabel.text = resetMessage;
+        self.resetLabel.fontSize = 40;
+        self.resetLabel.fontColor = [SKColor blackColor];
+        self.resetLabel.position = CGPointMake(self.size.width/2, self.size.height/4);
+        self.resetLabel.name = @"resetLabel";
+        
+        //Platforms node
+        platforms = [SKNode node];
+        [self addChild:platforms];
         
         //Set score
         self.score = 0;
@@ -139,10 +152,74 @@ static const uint32_t groundCategory =  0x1 << 2;
     [redBall runAction:[SKAction sequence:@[actionMove, ballCross, actionMoveDone]]];
 }
 
+//Adds platforms
+-(void)addPlatform
+{
+    self.platform = [SKSpriteNode spriteNodeWithImageNamed:@"platform"];
+    int minY = self.platform.size.height / 2;
+    int maxY = self.frame.size.height - self.platform.size.height / 2;
+    int rangeY = maxY - minY;
+    int actualY = (arc4random() % rangeY) + minY;
+    
+    self.platform.xScale = 0.35;
+    self.platform.yScale = 0.35;
+    
+    //Initiates red ball offscreen
+    if (actualY >= 75)
+    {
+        //Prevents balls from spawning in the ground
+        self.platform.position = CGPointMake(self.frame.size.width + self.platform.size.width/2, actualY);
+        [platforms addChild:self.platform];
+    }
+    
+    self.platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.platform.size];
+    self.platform.physicsBody.dynamic = NO;
+    self.platform.physicsBody.categoryBitMask = platformCategory;
+    self.platform.physicsBody.contactTestBitMask = playerCategory;
+    self.platform.physicsBody.collisionBitMask = 0;
+    self.platform.physicsBody.affectedByGravity = NO;
+    self.platform.physicsBody.usesPreciseCollisionDetection = YES;
+    
+    //Determine speed of red ball
+    int minDuration = 3.0;
+    int maxDuration = 5.0;
+    int rangeDuration = maxDuration - minDuration;
+    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    
+    // Create the actions
+    SKAction *actionMove = [SKAction moveTo:CGPointMake(-self.platform.size.width/2, actualY) duration:actualDuration];
+    SKAction *actionMoveDone = [SKAction removeFromParent];
+    SKAction *platformCross = [SKAction runBlock:^{
+        NSLog(@"Platform passed by");
+    }];
+    [self.platform runAction:[SKAction sequence:@[actionMove, platformCross, actionMoveDone]]];
+}
+
 - (void)pauseScene
 {
     self.paused = YES;
     [self addChild:self.pauseLabel];
+    [self addChild:self.resetLabel];
+}
+
+- (void)resetScene
+{
+    //Unpauses scene
+    self.paused = NO;
+    
+    //Reset player location and speed
+    self.playerSprite.position = CGPointMake(self.posX, self.posY);
+    self.playerSprite.physicsBody.velocity = CGVectorMake(0, 0);
+    
+    [platforms removeAllChildren];
+    
+    //Removes Labels
+    [self.pauseLabel removeFromParent];
+    [self.resetLabel removeFromParent];
+    
+    //Resets score
+    self.score = 0;
+    
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
@@ -150,7 +227,8 @@ static const uint32_t groundCategory =  0x1 << 2;
     self.lastSpawnTimeInterval += timeSinceLast;
     if (self.lastSpawnTimeInterval > 0.75) {
         self.lastSpawnTimeInterval = 0;
-        [self addBall];
+        //[self addBall];
+        [self addPlatform];
     }
 }
 
@@ -184,12 +262,12 @@ static const uint32_t groundCategory =  0x1 << 2;
         NSLog(@"Touch Location X: %f \n Touch Location Y: %f", location.x, location.y);
         SKNode *node = [self nodeAtPoint:location];
         
-        if (location.x < self.playerSprite.position.x)
+        if (location.x < self.frame.size.width/2)
         {
             NSLog(@"Tapped left");
             self.playerSprite.physicsBody.velocity = CGVectorMake(-100.0, currentYMove);
         }
-        else if (location.x > self.playerSprite.position.x)
+        else if (location.x > self.frame.size.width/2)
         {
              NSLog(@"Tapped right");
             self.playerSprite.physicsBody.velocity = CGVectorMake(100.0, currentYMove);
@@ -206,16 +284,24 @@ static const uint32_t groundCategory =  0x1 << 2;
             {
                 self.paused = NO;
                 [self.pauseLabel removeFromParent];
+                [self.resetLabel removeFromParent];
             }
         }
+        
+        if ([node.name isEqualToString:@"resetLabel"])
+        {
+            NSLog(@"Reset label pressed");
+            [self resetScene];
+        }
+        
         else if ([node.name isEqualToString:@"ground"])
         {
-            if (jumpCounter <= 1)
-            {
-                self.playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 250.0);
+            //if (jumpCounter <= 1)
+            //{
+                self.playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 300.0);
                 NSLog(@"Tapped on ground - moving player up");
                 jumpCounter++;
-            }
+            //}
         }
     }
     
@@ -275,7 +361,7 @@ static const uint32_t groundCategory =  0x1 << 2;
     }
     
     //Red ball collides with the player
-    if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & groundCategory) != 0)
+    if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & platformCategory) != 0)
     {
         //Resets jump counter
         jumpCounter = 0;

@@ -15,14 +15,17 @@
     CGFloat currentYMove;
     CGFloat currentXMove;
     int jumpCounter;
+    SKNode *platforms;
 }
 
 @property SKSpriteNode *playerSprite;
 @property SKLabelNode *scoreLabel;
 @property SKSpriteNode *pauseButton;
 @property SKSpriteNode *ground;
+@property SKSpriteNode *platform;
 @property NSString *scoreString;
 @property SKLabelNode *pauseLabel;
+@property SKLabelNode *resetLabel;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property int score;
