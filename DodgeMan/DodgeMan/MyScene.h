@@ -12,25 +12,38 @@
 {
     NSDate *startTime;
     BOOL isTouching;
+    
+    //Player coords
     CGFloat currentYMove;
     CGFloat currentXMove;
+    
+    //Starting Player coords
+    float posX;
+    float posY;
+    
+    //Player jump counter
     int jumpCounter;
+    
+    //Score
+    int score;
+    
+    //Nodes
     SKNode *platforms;
+    SKSpriteNode *playerSprite;
+    SKLabelNode *scoreLabel;
+    SKSpriteNode *pauseButton;
+    SKSpriteNode *ground;
+    SKSpriteNode *platform;
+    SKLabelNode *pauseLabel;
+    SKLabelNode *resetLabel;
+    
+    //Score
+    NSString *scoreString;
+    
 }
 
-@property SKSpriteNode *playerSprite;
-@property SKLabelNode *scoreLabel;
-@property SKSpriteNode *pauseButton;
-@property SKSpriteNode *ground;
-@property SKSpriteNode *platform;
-@property NSString *scoreString;
-@property SKLabelNode *pauseLabel;
-@property SKLabelNode *resetLabel;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
-@property int score;
-@property float posX;
-@property float posY;
 @property NSUserDefaults *storeData;
 
 @end
