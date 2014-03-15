@@ -157,7 +157,7 @@ static const uint32_t platformCategory =  0x1 << 2;
 {
     platform = [SKSpriteNode spriteNodeWithImageNamed:@"platform"];
     int minY = platform.size.height / 2;
-    int maxY = self.frame.size.height - platform.size.height / 2;
+    int maxY = self.frame.size.height/2;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
@@ -225,7 +225,7 @@ static const uint32_t platformCategory =  0x1 << 2;
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
     self.lastSpawnTimeInterval += timeSinceLast;
-    if (self.lastSpawnTimeInterval > 0.75) {
+    if (self.lastSpawnTimeInterval > 0.85) {
         self.lastSpawnTimeInterval = 0;
         //[self addBall];
         [self addPlatform];
