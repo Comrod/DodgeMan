@@ -30,26 +30,21 @@ static const uint32_t platformCategory =  0x1 << 2;
         self.backgroundColor = [SKColor colorWithRed:0.53 green:0.81 blue:0.92 alpha:1.0];
         
         //Set Ground
-        for (int i = 0; i < 2; i++)
-        {
-            ground = [SKSpriteNode spriteNodeWithImageNamed:@"parallaxground"];
-            ground.xScale = 0.5;
-            ground.yScale = 0.5;
-            ground.anchorPoint = CGPointMake(0, 0);
-            ground.position = CGPointMake(i * ground.size.width, 0);
-            ground.name = @"ground";
-            ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
-            ground.physicsBody.dynamic = NO;
-            ground.physicsBody.categoryBitMask = platformCategory;
-            ground.physicsBody.contactTestBitMask = playerCategory;
-            ground.physicsBody.collisionBitMask = 0;
-            ground.physicsBody.usesPreciseCollisionDetection = YES;
-            ground.physicsBody.friction = 0.0;
-            [self addChild:ground];
-        }
+        ground = [SKSpriteNode spriteNodeWithImageNamed:@"ground"];
+        ground.position = CGPointMake(CGRectGetMidX(self.frame), 34);
+        ground.xScale = 0.5;
+        ground.yScale = 0.5;
+        ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
+        ground.physicsBody.dynamic = NO;
+        ground.physicsBody.categoryBitMask = platformCategory;
+        ground.physicsBody.contactTestBitMask = playerCategory;
+        ground.physicsBody.collisionBitMask = 0;
+        ground.physicsBody.usesPreciseCollisionDetection = YES;
+        ground.physicsBody.friction = 0.0;
+        ground.name = @"ground";
 
         //Player
-        posX = 60;
+        posX = 50;
         posY = 88.5;
         playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         playerSprite.position = CGPointMake(posX, posY);
@@ -105,10 +100,8 @@ static const uint32_t platformCategory =  0x1 << 2;
         //Sets jump counter
         jumpCounter = 0;
         
-        //Platform counter
-        platformCounter = 0;
-        
         //Add nodes
+        [self addChild:ground];
         [self addChild:playerSprite];
         [self addChild:scoreLabel];
         [self addChild:pauseButton];
@@ -177,7 +170,6 @@ static const uint32_t platformCategory =  0x1 << 2;
         //Prevents balls from spawning in the ground
         platform.position = CGPointMake(self.frame.size.width + platform.size.width/2, actualY);
         [platforms addChild:platform];
-        platformCounter++;
     }
     
     platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
@@ -199,23 +191,10 @@ static const uint32_t platformCategory =  0x1 << 2;
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *platformCross = [SKAction runBlock:^{
         NSLog(@"Platform passed by");
-        platformCounter--;
     }];
     [platform runAction:[SKAction sequence:@[actionMove, platformCross, actionMoveDone]]];
 }
 
-//Add platforms if there aren't any on screen
-- (void)fewPlatforms
-{
-    
-    if (platformCounter < 1)
-    {
-        [self addPlatform];
-        self.lastSpawnTimeInterval = 0;
-    }
-}
-
-//Pause scene
 - (void)pauseScene
 {
     self.paused = YES;
@@ -223,7 +202,6 @@ static const uint32_t platformCategory =  0x1 << 2;
     [self addChild:resetLabel];
 }
 
-//Reset scene
 - (void)resetScene
 {
     //Unpauses scene
@@ -242,22 +220,6 @@ static const uint32_t platformCategory =  0x1 << 2;
     //Resets score
     score = 0;
     
-    //Reset platform counter
-    platformCounter = 0;
-    
-}
-
-//Ground parallax effect
-- (void)parallaxGround
-{
-    [self enumerateChildNodesWithName:@"ground" usingBlock: ^(SKNode *node, BOOL *stop){
-        SKSpriteNode *groundMethod = (SKSpriteNode *)node;
-        groundMethod.position = CGPointMake(groundMethod.position.x - 2, groundMethod.position.y);
-        
-        if (groundMethod.position.x <= -groundMethod.size.width) {
-            groundMethod.position = CGPointMake(groundMethod.position.x + groundMethod.size.width * 2, groundMethod.position.y);
-        }
-    }];
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
@@ -283,16 +245,9 @@ static const uint32_t platformCategory =  0x1 << 2;
     }
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
     
-    //Ground parallax effect
-    [self parallaxGround];
-    
     //Set current dy velocity
     currentYMove = playerSprite.physicsBody.velocity.dy;
     currentXMove = playerSprite.physicsBody.velocity.dx;
-    
-    //Add platforms if there aren't any on screen
-    [self fewPlatforms];
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
