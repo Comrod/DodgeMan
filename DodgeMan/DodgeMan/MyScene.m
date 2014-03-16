@@ -109,11 +109,10 @@ static const uint32_t platformCategory =  0x1 << 3;
         platforms = [SKNode node];
         [self addChild:platforms];
         
-        //Set score
+        //Set local ints
         score = 0;
-        
-        //Sets jump counter
         jumpCounter = 0;
+        platformSpeed = 4.0;
         
         //Add nodes
         [self addChild:ground];
@@ -123,7 +122,7 @@ static const uint32_t platformCategory =  0x1 << 3;
         [self addChild:pauseButton];
         
         //Remove starter platform after delay
-        [self performSelector:@selector(removeStarterPlatform) withObject:nil afterDelay:3.0];
+        [self performSelector:@selector(removeStarterPlatform) withObject:nil afterDelay:4.0];
         
     }
     return self;
@@ -176,7 +175,7 @@ static const uint32_t platformCategory =  0x1 << 3;
 {
     platform = [SKSpriteNode spriteNodeWithImageNamed:@"platform"];
     int minY = 75 + (platform.size.height / 2);
-    int maxY = self.frame.size.height - platform.size.height*2;
+    int maxY = self.frame.size.height - platform.size.height*2.5;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
@@ -197,11 +196,8 @@ static const uint32_t platformCategory =  0x1 << 3;
     platform.physicsBody.usesPreciseCollisionDetection = YES;
     platform.physicsBody.friction = 0.2;
     
-    //Determine speed of platform
-    int actualDuration = 3.5;
-    
     // Create the actions
-    SKAction *actionMove = [SKAction moveTo:CGPointMake(-platform.size.width/2, actualY) duration:actualDuration];
+    SKAction *actionMove = [SKAction moveTo:CGPointMake(-platform.size.width/2, actualY) duration:platformSpeed];
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *platformCross = [SKAction runBlock:^{
         NSLog(@"Platform passed by");
@@ -260,12 +256,28 @@ static const uint32_t platformCategory =  0x1 << 3;
     [self.view presentScene:endGameScene transition: reveal];
 }
 
+//Increases difficulty of game
+- (void)increaseDifficulty
+{
+    platformSpeed -= 0.3;
+    NSLog(@"Increased difficulty");
+}
+
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
+    //Platform spawn loop
     self.lastSpawnTimeInterval += timeSinceLast;
     if (self.lastSpawnTimeInterval > 1.5) {
         self.lastSpawnTimeInterval = 0;
         [self addPlatform];
+    }
+    
+    //Increase difficulty with time
+    self.lastIncreaseDiffTimeInterval += timeSinceLast;
+    if (self.lastIncreaseDiffTimeInterval > 30)
+    {
+        self.lastIncreaseDiffTimeInterval = 0;
+        [self increaseDifficulty];
     }
 }
 
@@ -277,10 +289,11 @@ static const uint32_t platformCategory =  0x1 << 3;
     CFTimeInterval timeSinceLast = currentTime - self.lastUpdateTimeInterval;
     self.lastUpdateTimeInterval = currentTime;
     if (timeSinceLast > 1) { //More than a second since last update
-        timeSinceLast = 1.0 / 120.0;
+        timeSinceLast = 1.0 / 60.0;
         self.lastUpdateTimeInterval = currentTime;
     }
     [self updateWithTimeSinceLastUpdate:timeSinceLast];
+    
     
     //Set current dy velocity
     currentYMove = playerSprite.physicsBody.velocity.dy;

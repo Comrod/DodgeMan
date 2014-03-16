@@ -27,6 +27,10 @@
     //Score
     int score;
     
+    //Difficulty Settings
+    int platformSpeed;
+    
+    
     //Nodes
     SKNode *platforms;
     SKSpriteNode *playerSprite;
@@ -45,6 +49,8 @@
 
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
+@property (nonatomic) NSTimeInterval lastIncreaseDiffTimeInterval;
+@property (nonatomic) NSTimeInterval lastUpdateDiffTimeInterval;
 @property NSUserDefaults *storeData;
 
 @end
