@@ -24,15 +24,18 @@
     //Player jump counter
     int jumpCounter;
     
+    //Platform counter
+    int platformCounter;
+    
     //Score
     int score;
     
     //Nodes
     SKNode *platforms;
     SKSpriteNode *playerSprite;
+    SKSpriteNode *ground;
     SKLabelNode *scoreLabel;
     SKSpriteNode *pauseButton;
-    SKSpriteNode *ground;
     SKSpriteNode *platform;
     SKLabelNode *pauseLabel;
     SKLabelNode *resetLabel;
