@@ -33,6 +33,7 @@
 		241AF88A18CBA95D00AA7AF9 /* EndGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 241AF88918CBA95D00AA7AF9 /* EndGameScene.m */; };
 		241AF88C18CBBE0E00AA7AF9 /* pauseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 241AF88B18CBBE0E00AA7AF9 /* pauseButton.png */; };
 		245D8DCF18D2C03000B15227 /* platform.png in Resources */ = {isa = PBXBuildFile; fileRef = 245D8DCE18D2C03000B15227 /* platform.png */; };
+		24AAB4C018D56F7000DA76B5 /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 24AAB4BF18D56F7000DA76B5 /* MenuScene.m */; };
 		24B3512518CD4C0C000291BC /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B3512418CD4C0C000291BC /* ground.png */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,8 @@
 		241AF88918CBA95D00AA7AF9 /* EndGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndGameScene.m; sourceTree = "<group>"; };
 		241AF88B18CBBE0E00AA7AF9 /* pauseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButton.png; sourceTree = "<group>"; };
 		245D8DCE18D2C03000B15227 /* platform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = platform.png; sourceTree = "<group>"; };
+		24AAB4BE18D56F7000DA76B5 /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
+		24AAB4BF18D56F7000DA76B5 /* MenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuScene.m; sourceTree = "<group>"; };
 		24B3512418CD4C0C000291BC /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +152,8 @@
 				241AF85118CB67C600AA7AF9 /* ViewController.m */,
 				241AF85318CB67C600AA7AF9 /* MyScene.h */,
 				241AF85418CB67C600AA7AF9 /* MyScene.m */,
+				24AAB4BE18D56F7000DA76B5 /* MenuScene.h */,
+				24AAB4BF18D56F7000DA76B5 /* MenuScene.m */,
 				241AF88818CBA95D00AA7AF9 /* EndGameScene.h */,
 				241AF88918CBA95D00AA7AF9 /* EndGameScene.m */,
 				241AF87B18CB748500AA7AF9 /* Textures */,
@@ -314,6 +319,7 @@
 				241AF85518CB67C600AA7AF9 /* MyScene.m in Sources */,
 				241AF85218CB67C600AA7AF9 /* ViewController.m in Sources */,
 				241AF84C18CB67C600AA7AF9 /* AppDelegate.m in Sources */,
+				24AAB4C018D56F7000DA76B5 /* MenuScene.m in Sources */,
 				241AF88A18CBA95D00AA7AF9 /* EndGameScene.m in Sources */,
 				241AF84818CB67C600AA7AF9 /* main.m in Sources */,
 			);
