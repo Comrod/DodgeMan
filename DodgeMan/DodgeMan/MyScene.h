@@ -34,6 +34,7 @@
     SKSpriteNode *pauseButton;
     SKSpriteNode *ground;
     SKSpriteNode *platform;
+    SKSpriteNode *starterPlatform;
     SKLabelNode *pauseLabel;
     SKLabelNode *resetLabel;
     

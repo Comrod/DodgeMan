@@ -11,7 +11,8 @@
 
 static const uint32_t redBallCategory =  0x1 << 0;
 static const uint32_t playerCategory =  0x1 << 1;
-static const uint32_t platformCategory =  0x1 << 2;
+static const uint32_t groundCategory =  0x1 << 2;
+static const uint32_t platformCategory =  0x1 << 3;
 
 @implementation MyScene
 
@@ -36,7 +37,7 @@ static const uint32_t platformCategory =  0x1 << 2;
         ground.yScale = 0.5;
         ground.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:ground.size];
         ground.physicsBody.dynamic = NO;
-        ground.physicsBody.categoryBitMask = platformCategory;
+        ground.physicsBody.categoryBitMask = groundCategory;
         ground.physicsBody.contactTestBitMask = playerCategory;
         ground.physicsBody.collisionBitMask = 0;
         ground.physicsBody.usesPreciseCollisionDetection = YES;
@@ -45,7 +46,7 @@ static const uint32_t platformCategory =  0x1 << 2;
 
         //Player
         posX = 50;
-        posY = 88.5;
+        posY = 250;
         playerSprite = [SKSpriteNode spriteNodeWithImageNamed:@"character"];
         playerSprite.position = CGPointMake(posX, posY);
         
@@ -54,10 +55,24 @@ static const uint32_t platformCategory =  0x1 << 2;
         playerSprite.physicsBody.dynamic = YES;
         playerSprite.physicsBody.categoryBitMask = playerCategory;
         playerSprite.physicsBody.contactTestBitMask = redBallCategory;
-        playerSprite.physicsBody.collisionBitMask = platformCategory;
+        playerSprite.physicsBody.collisionBitMask = platformCategory|groundCategory;
         playerSprite.physicsBody.usesPreciseCollisionDetection = YES;
         playerSprite.physicsBody.linearDamping = 0.3;
         playerSprite.physicsBody.allowsRotation = NO;
+        
+        //Starter Platform
+        starterPlatform = [SKSpriteNode spriteNodeWithImageNamed:@"platform"];
+        starterPlatform.xScale = 0.35;
+        starterPlatform.yScale = 0.35;
+        starterPlatform.position = CGPointMake(starterPlatform.size.width/2, self.frame.size.height - (self.frame.size.height/2));
+        starterPlatform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:starterPlatform.size];
+        starterPlatform.physicsBody.dynamic = NO;
+        starterPlatform.physicsBody.categoryBitMask = platformCategory;
+        starterPlatform.physicsBody.contactTestBitMask = playerCategory;
+        starterPlatform.physicsBody.collisionBitMask = 0;
+        starterPlatform.physicsBody.affectedByGravity = NO;
+        starterPlatform.physicsBody.usesPreciseCollisionDetection = YES;
+        starterPlatform.physicsBody.friction = 0.2;
         
         //Score Label
         scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Arial-BoldMT"];
@@ -68,7 +83,7 @@ static const uint32_t platformCategory =  0x1 << 2;
         
         //Pause Button
         pauseButton = [SKSpriteNode spriteNodeWithImageNamed:@"pauseButton"];
-        pauseButton.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 40);
+        pauseButton.position = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 35);
         pauseButton.name = @"pauseButton";
         
         //Pause Label
@@ -102,9 +117,13 @@ static const uint32_t platformCategory =  0x1 << 2;
         
         //Add nodes
         [self addChild:ground];
+        [self addChild:starterPlatform];
         [self addChild:playerSprite];
         [self addChild:scoreLabel];
         [self addChild:pauseButton];
+        
+        //Remove starter platform after delay
+        [self performSelector:@selector(removeStarterPlatform) withObject:nil afterDelay:3.0];
         
     }
     return self;
@@ -156,22 +175,19 @@ static const uint32_t platformCategory =  0x1 << 2;
 -(void)addPlatform
 {
     platform = [SKSpriteNode spriteNodeWithImageNamed:@"platform"];
-    int minY = platform.size.height / 2;
-    int maxY = self.frame.size.height/2;
+    int minY = 75 + (platform.size.height / 2);
+    int maxY = self.frame.size.height - platform.size.height*2;
     int rangeY = maxY - minY;
     int actualY = (arc4random() % rangeY) + minY;
     
     platform.xScale = 0.35;
     platform.yScale = 0.35;
     
-    //Initiates red ball offscreen
-    if (actualY >= 75)
-    {
-        //Prevents balls from spawning in the ground
-        platform.position = CGPointMake(self.frame.size.width + platform.size.width/2, actualY);
-        [platforms addChild:platform];
-    }
+    //Initiates platform
+    platform.position = CGPointMake(self.frame.size.width + platform.size.width/2, actualY);
+    [platforms addChild:platform];
     
+    //Platform physics
     platform.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:platform.size];
     platform.physicsBody.dynamic = NO;
     platform.physicsBody.categoryBitMask = platformCategory;
@@ -179,20 +195,26 @@ static const uint32_t platformCategory =  0x1 << 2;
     platform.physicsBody.collisionBitMask = 0;
     platform.physicsBody.affectedByGravity = NO;
     platform.physicsBody.usesPreciseCollisionDetection = YES;
+    platform.physicsBody.friction = 0.2;
     
-    //Determine speed of red ball
-    int minDuration = 3.0;
-    int maxDuration = 5.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
+    //Determine speed of platform
+    int actualDuration = 3.5;
     
     // Create the actions
     SKAction *actionMove = [SKAction moveTo:CGPointMake(-platform.size.width/2, actualY) duration:actualDuration];
     SKAction *actionMoveDone = [SKAction removeFromParent];
     SKAction *platformCross = [SKAction runBlock:^{
         NSLog(@"Platform passed by");
+        score ++;
+        scoreString = [NSString stringWithFormat:@"%i", score];
+        scoreLabel.text = scoreString;
     }];
     [platform runAction:[SKAction sequence:@[actionMove, platformCross, actionMoveDone]]];
+}
+
+- (void)removeStarterPlatform
+{
+    [starterPlatform removeFromParent];
 }
 
 - (void)pauseScene
@@ -211,6 +233,9 @@ static const uint32_t platformCategory =  0x1 << 2;
     playerSprite.position = CGPointMake(posX, posY);
     playerSprite.physicsBody.velocity = CGVectorMake(0, 0);
     
+    //Add starter platform
+    [self addChild:starterPlatform];
+    
     [platforms removeAllChildren];
     
     //Removes Labels
@@ -222,12 +247,24 @@ static const uint32_t platformCategory =  0x1 << 2;
     
 }
 
+- (void)playerDies
+{
+    NSLog(@"Player died");
+    [playerSprite removeFromParent];
+    
+    //Stores Final score
+    [self.storeData setObject:scoreString forKey:@"scoreStringKey"];
+    
+    SKTransition *reveal = [SKTransition fadeWithDuration:0.5];
+    SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size];
+    [self.view presentScene:endGameScene transition: reveal];
+}
+
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast
 {
     self.lastSpawnTimeInterval += timeSinceLast;
-    if (self.lastSpawnTimeInterval > 0.85) {
+    if (self.lastSpawnTimeInterval > 1.5) {
         self.lastSpawnTimeInterval = 0;
-        //[self addBall];
         [self addPlatform];
     }
 }
@@ -298,7 +335,7 @@ static const uint32_t platformCategory =  0x1 << 2;
         {
             if (jumpCounter <= 1)
             {
-                playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 300.0);
+                playerSprite.physicsBody.velocity = CGVectorMake(currentXMove, 250.0);
                 NSLog(@"Tapped on ground - moving player up");
                 jumpCounter++;
             }
@@ -325,7 +362,6 @@ static const uint32_t platformCategory =  0x1 << 2;
 //Collision between ball and player - player dies
 - (void)redBall:(SKSpriteNode *)redBall didCollideWithPlayer:(SKSpriteNode *)player
 {
-    
     NSLog(@"Player died");
     [redBall removeFromParent];
     [playerSprite removeFromParent];
@@ -336,6 +372,12 @@ static const uint32_t platformCategory =  0x1 << 2;
     SKTransition *reveal = [SKTransition fadeWithDuration:0.5];
     SKScene *endGameScene = [[EndGameScene alloc] initWithSize:self.size];
     [self.view presentScene:endGameScene transition: reveal];
+}
+
+//Collision between player and ground
+- (void)playerSprite:(SKSpriteNode *)player didCollideWithGround:(SKSpriteNode *)ground
+{
+    [self playerDies];
 }
 
 - (void)didBeginContact:(SKPhysicsContact *)contact
@@ -360,18 +402,20 @@ static const uint32_t platformCategory =  0x1 << 2;
         NSLog(@"Player and ball collided");
     }
     
-    //Red ball collides with the player
+    //Player collides with platform
     if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & platformCategory) != 0)
     {
         //Resets jump counter
         jumpCounter = 0;
-        NSLog(@"Player and ball collided");
+        NSLog(@"Player and platform collided");
     }
-}
-
-- (void)didEndContact:(SKPhysicsContact *)contact
-{
-    NSLog(@"Contact ended");
+    
+    //Player collides with ground
+    if ((firstBody.categoryBitMask & playerCategory) != 0 && (secondBody.categoryBitMask & groundCategory) != 0)
+    {
+        [self playerSprite:(SKSpriteNode *) firstBody.node didCollideWithGround:(SKSpriteNode *) secondBody.node];
+        NSLog(@"Player and ground collided");
+    }
 }
 
 @end
